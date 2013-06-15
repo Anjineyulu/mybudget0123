@@ -5,7 +5,9 @@
   
   <static-files>
   <include path="/**.png" />
+  <include path="/**.html" />
   </static-files>
   
+  <threadsafe>true</threadsafe>
   <sessions-enabled>true</sessions-enabled>
 </appengine-web-app>

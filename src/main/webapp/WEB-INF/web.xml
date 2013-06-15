@@ -7,13 +7,17 @@
 
   <!-- Servlets -->
   <servlet>
-    <servlet-name>budgetServlet</servlet-name>
-    <servlet-class>org.fortytwo.developer.mybudget0123.server.Service</servlet-class>
+    <servlet-name>bugetDataProvider</servlet-name>
+    <servlet-class>org.fortytwo.developer.mybudget0123.server.DataProviderServerSide</servlet-class>
+  </servlet>
+  <servlet>
+  	<servlet-name>loginService</servlet-name>
+  	<servlet-class>org.fortytwo.developer.mybudget0123.server.LoginServiceImpl</servlet-class>
   </servlet>
 
   <servlet-mapping>
-    <servlet-name>budgetServlet</servlet-name>
-    <url-pattern>/mybudget0123/budget</url-pattern>
+    <servlet-name>bugetDataProvider</servlet-name>
+    <url-pattern>/mybudget0123/dataprovider</url-pattern>
   </servlet-mapping>
 
   <!-- Default page to serve -->
