@@ -15,60 +15,13 @@
       <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
    </properties>
    <dependencies>
-<!--       <\!-\- SLF4J logging libraries -\-> -->
-<!--       <dependency> -->
-<!--          <groupId>org.slf4j</groupId> -->
-<!--          <artifactId>slf4j-api</artifactId> -->
-<!--          <version>${slf4jVersion}</version> -->
-<!--       </dependency> -->
-<!--       <dependency> -->
-<!--          <\!-\- any library that uses commons-logging will be directed to slf4j -\-> -->
-<!--          <groupId>org.slf4j</groupId> -->
-<!--          <artifactId>jcl-over-slf4j</artifactId> -->
-<!--          <version>${slf4jVersion}</version> -->
-<!--       </dependency> -->
-<!--       <dependency> -->
-<!--          <\!-\- any library that uses slf4j will be directed to java.util.logging -\-> -->
-<!--          <groupId>org.slf4j</groupId> -->
-<!--          <artifactId>slf4j-jdk14</artifactId> -->
-<!--          <version>${slf4jVersion}</version> -->
-<!--       </dependency> -->
-<!--       <\!-\- End SLF4J logging libraries -\-> -->
-<!--       <\!-\- Libraries used for testing -\-> -->
-<!--       <dependency> -->
-<!--          <groupId>junit</groupId> -->
-<!--          <artifactId>junit</artifactId> -->
-<!--          <version>4.7</version> -->
-<!--          <scope>test</scope> -->
-<!--       </dependency> -->
-<!--       <dependency> -->
-<!--          <groupId>org.mockito</groupId> -->
-<!--          <artifactId>mockito-all</artifactId> -->
-<!--          <version>1.9.0</version> -->
-<!--          <scope>test</scope> -->
-<!--       </dependency> -->
-      <!-- End Libraries used for testing -->
-<!--       <\!-\- PayPal libraries -\-> -->
-<!--       <dependency> -->
-<!--          <groupId>com.paypal</groupId> -->
-<!--          <artifactId>adaptive-payments-gae</artifactId> -->
-<!--          <version>0.7.88</version> -->
-<!--       </dependency> -->
-<!--       <dependency> -->
-<!--          <groupId>com.paypal</groupId> -->
-<!--          <artifactId>auth-signature</artifactId> -->
-<!--          <version>1.0</version> -->
-<!--       </dependency> -->
-<!--       <\!-\- End PayPal libraries -\-> -->
-<!--       <dependency> -->
-<!--          <\!-\- lucene must come before the appengine-api-1.0-sdk on the classpath during compilation because -->
-<!--    of a namespace clash. maven uses order in pom to determine order of jars on classpath. -->
-<!--    our project needs 3.4.0 but the appengine-api-sdk jar bundles 2.9 -->
-<!--    See http://code.google.com/p/googleappengine/issues/detail?id=8451 -\-> -->
-<!--          <groupId>org.apache.lucene</groupId> -->
-<!--          <artifactId>lucene-analyzers</artifactId> -->
-<!--          <version>3.4.0</version> -->
-<!--       </dependency> -->
+     <!-- Libraries used for testing -->
+      <dependency>
+         <groupId>junit</groupId>
+         <artifactId>junit</artifactId>
+         <version>4.7</version>
+         <scope>test</scope>
+      </dependency>
       <!-- Google App Engine libraries -->
       <dependency>
          <!-- this library provides the core appengine features -->
@@ -76,12 +29,12 @@
          <artifactId>appengine-api-1.0-sdk</artifactId>
          <version>${gaeVersion}</version>
       </dependency>
-      <dependency>
-         <!-- this library provides experimental appengine features -->
-         <groupId>com.google.appengine</groupId>
-         <artifactId>appengine-api-labs</artifactId>
-         <version>${gaeVersion}</version>
-      </dependency>
+<!--       <dependency> -->
+<!--          <\!-\- this library provides experimental appengine features -\-> -->
+<!--          <groupId>com.google.appengine</groupId> -->
+<!--          <artifactId>appengine-api-labs</artifactId> -->
+<!--          <version>${gaeVersion}</version> -->
+<!--       </dependency> -->
       <dependency>
          <!-- required for app engine based unit tests -->
          <groupId>com.google.appengine</groupId>
@@ -162,68 +115,6 @@
          <version>${gwtVersion}</version>
          <scope>provided</scope>
       </dependency>
-<!--       <dependency> -->
-<!--          <\!-\- Hibernate Validator is used for validation in the client and on the server -\-> -->
-<!--          <groupId>org.hibernate</groupId> -->
-<!--          <artifactId>hibernate-validator</artifactId> -->
-<!--          <version>4.0.2.GA</version> -->
-<!--       </dependency> -->
-<!--       <dependency> -->
-<!--          <\!-\- this has a scope of provided because the Hibernate Validator sources must -->
-<!--    be on the classpath during gwt:compile but it shouldnt be bundled with the war -\-> -->
-<!--          <groupId>org.hibernate</groupId> -->
-<!--          <artifactId>hibernate-validator</artifactId> -->
-<!--          <version>4.0.2.GA</version> -->
-<!--          <classifier>sources</classifier> -->
-<!--          <scope>provided</scope> -->
-<!--       </dependency> -->
-<!--       <\!-\- End GWT libraries -\-> -->
-<!--       <dependency> -->
-<!--          <groupId>commons-codec</groupId> -->
-<!--          <artifactId>commons-codec</artifactId> -->
-<!--          <version>1.6</version> -->
-<!--       </dependency> -->
-<!--       <dependency> -->
-<!--          <groupId>org.apache.commons</groupId> -->
-<!--          <artifactId>commons-lang3</artifactId> -->
-<!--          <version>3.1</version> -->
-<!--       </dependency> -->
-<!--       <dependency> -->
-<!--          <groupId>commons-io</groupId> -->
-<!--          <artifactId>commons-io</artifactId> -->
-<!--          <version>2.4</version> -->
-<!--       </dependency> -->
-<!--       <dependency> -->
-<!--          <groupId>net.sourceforge.htmlunit</groupId> -->
-<!--          <artifactId>htmlunit</artifactId> -->
-<!--          <version>2.10</version> -->
-<!--          <exclusions> -->
-<!--             <exclusion> -->
-<!--                <groupId>commons-logging</groupId> -->
-<!--                <artifactId>commons-logging</artifactId> -->
-<!--             </exclusion> -->
-<!--          </exclusions> -->
-<!--       </dependency> -->
-<!--       <dependency> -->
-<!--          <groupId>com.rosaloves</groupId> -->
-<!--          <artifactId>bitlyj</artifactId> -->
-<!--          <version>2.0.0</version> -->
-<!--       </dependency> -->
-<!--       <dependency> -->
-<!--          <groupId>com.sun.jersey</groupId> -->
-<!--          <artifactId>jersey-servlet</artifactId> -->
-<!--          <version>1.14</version> -->
-<!--       </dependency> -->
-<!--       <dependency> -->
-<!--          <groupId>org.codehaus.jackson</groupId> -->
-<!--          <artifactId>jackson-jaxrs</artifactId> -->
-<!--          <version>1.9.7</version> -->
-<!--       </dependency> -->
-<!--       <dependency> -->
-<!--          <groupId>org.apache.velocity</groupId> -->
-<!--          <artifactId>velocity</artifactId> -->
-<!--          <version>1.7</version> -->
-<!--       </dependency> -->
    </dependencies>
    <build>
       <!-- Compiled java classes and all the resources get dumped into 
@@ -270,7 +161,7 @@
             <configuration>
                <modules>
                   <!-- Marketplace gwt module inherits Core gwt module therefore both will be gwt:compiled -->
-                  <module>org.fortytwo.developers.mybudget0123.client.MyBudget0123</module>
+                  <module>org.fortytwo.developers.mybudget0123.MyBudget0123</module>
                </modules>
                <runTarget>MyBudget0123.html</runTarget>
                <appEngineVersion>${gaeVersion}</appEngineVersion>

@@ -1,4 +1,4 @@
-package org.fortytwo.developers.mybudget0123.client.view;
+package org.fortytwo.developers.mybudget0123.client.view.cell;
 
 import org.fortytwo.developers.mybudget0123.shared.CashFlow;
 

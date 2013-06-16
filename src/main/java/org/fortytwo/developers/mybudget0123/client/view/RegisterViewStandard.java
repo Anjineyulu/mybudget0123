@@ -1,10 +1,10 @@
 package org.fortytwo.developers.mybudget0123.client.view;
 
 import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.util.List;
 
+import org.fortytwo.developers.mybudget0123.client.view.cell.AmountCell;
 import org.fortytwo.developers.mybudget0123.shared.CashFlow;
-import org.fortytwo.developers.mybudget0123.shared.OwnerID;
 import org.fortytwo.developers.mybudget0123.shared.RegisterData;
 
 import com.google.gwt.cell.client.TextCell;
@@ -57,8 +57,13 @@ public class RegisterViewStandard extends Composite implements RegisterView {
 		
 		registerEntriesDataProvider = new ListDataProvider<RegisterData>();
 		registerEntriesDataProvider.addDataDisplay(registerEntries);
-
+		
 		initWidget(uiBinder.createAndBindUi(this));
+	}
+
+	@Override
+	public void setData(List<RegisterData> data) {
+		registerEntriesDataProvider.setList(data);
 	}
 
 }

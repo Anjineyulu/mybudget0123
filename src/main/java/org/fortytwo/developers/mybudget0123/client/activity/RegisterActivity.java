@@ -39,9 +39,8 @@ public class RegisterActivity extends AbstractActivity {
 			}
 
 			@Override
-			public void onSuccess(List<RegisterData> arg0) {
-				// TODO Auto-generated method stub
-
+			public void onSuccess(List<RegisterData> data) {
+				view.setData(data);
 			}
 
 		});

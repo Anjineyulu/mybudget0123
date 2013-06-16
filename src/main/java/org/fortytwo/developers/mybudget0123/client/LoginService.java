@@ -4,6 +4,8 @@ import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 
 @RemoteServiceRelativePath("login")
-public class LoginService implements RemoteService {
+public interface LoginService extends RemoteService {
+
+	boolean isUserLogged();
 	
 }
