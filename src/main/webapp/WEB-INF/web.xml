@@ -6,7 +6,7 @@
 <web-app>
 
   <!-- Servlets -->
-  <servlet>
+  <!--<servlet>
     <servlet-name>bugetDataProvider</servlet-name>
     <servlet-class>org.fortytwo.developer.mybudget0123.server.DataProviderServerSide</servlet-class>
   </servlet>
@@ -18,7 +18,7 @@
   <servlet-mapping>
     <servlet-name>bugetDataProvider</servlet-name>
     <url-pattern>/mybudget0123/dataprovider</url-pattern>
-  </servlet-mapping>
+  </servlet-mapping>-->
 
   <!-- Default page to serve -->
   <welcome-file-list>
