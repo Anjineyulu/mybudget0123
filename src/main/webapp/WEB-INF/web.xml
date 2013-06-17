@@ -6,19 +6,15 @@
 <web-app>
 
   <!-- Servlets -->
-  <!--<servlet>
-    <servlet-name>bugetDataProvider</servlet-name>
-    <servlet-class>org.fortytwo.developer.mybudget0123.server.DataProviderServerSide</servlet-class>
-  </servlet>
   <servlet>
-  	<servlet-name>loginService</servlet-name>
-  	<servlet-class>org.fortytwo.developer.mybudget0123.server.LoginServiceImpl</servlet-class>
+    <servlet-name>dataProvider</servlet-name>
+    <servlet-class>org.fortytwo.developer.mybudget0123.server.DataProviderImpl</servlet-class>
   </servlet>
 
   <servlet-mapping>
-    <servlet-name>bugetDataProvider</servlet-name>
-    <url-pattern>/mybudget0123/dataprovider</url-pattern>
-  </servlet-mapping>-->
+    <servlet-name>dataProvider</servlet-name>
+    <url-pattern>/MyBudget0123/data</url-pattern>
+  </servlet-mapping>
 
   <!-- Default page to serve -->
   <welcome-file-list>

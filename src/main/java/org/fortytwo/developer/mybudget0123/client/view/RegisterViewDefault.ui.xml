@@ -2,11 +2,11 @@
 <ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
 	xmlns:g="urn:import:com.google.gwt.user.client.ui"
 	xmlns:c="urn:import:com.google.gwt.user.cellview.client">
-	<ui:style>
-		
-	</ui:style>
-	<g:HTMLPanel>
-	<c:CellTable ui:field="registerEntries" />
 	
+	<g:HTMLPanel>
+		<!-- <c:CellTable ui:field="registerTable" />
+		<c:SimplePager ui:field="registerTablePager" /> -->
+		This is the register view!!
+		It You can see it it means that it works!
 	</g:HTMLPanel>
 </ui:UiBinder> 
