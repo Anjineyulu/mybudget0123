@@ -1,8 +1,8 @@
-package org.fortytwo.developer.mybudget0123.client.mvp;
+package org.fortytwo.developers.mybudget0123.client.mvp;
 
-import org.fortytwo.developer.mybudget0123.client.ClientFactory;
-import org.fortytwo.developer.mybudget0123.client.activity.RegisterActivity;
-import org.fortytwo.developer.mybudget0123.client.place.RegisterPlace;
+import org.fortytwo.developers.mybudget0123.client.ClientFactory;
+import org.fortytwo.developers.mybudget0123.client.activity.RegisterActivity;
+import org.fortytwo.developers.mybudget0123.client.place.RegisterPlace;
 
 import com.google.gwt.activity.shared.Activity;
 import com.google.gwt.activity.shared.ActivityMapper;

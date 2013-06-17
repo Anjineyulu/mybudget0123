@@ -1,6 +1,6 @@
-package org.fortytwo.developer.mybudget0123.client;
+package org.fortytwo.developers.mybudget0123.client;
 
-import org.fortytwo.developer.mybudget0123.client.view.RegisterView;
+import org.fortytwo.developers.mybudget0123.client.view.RegisterView;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.place.shared.PlaceController;

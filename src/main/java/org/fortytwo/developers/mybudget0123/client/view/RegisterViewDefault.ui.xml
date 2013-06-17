@@ -4,9 +4,7 @@
 	xmlns:c="urn:import:com.google.gwt.user.cellview.client">
 	
 	<g:HTMLPanel>
-		<!-- <c:CellTable ui:field="registerTable" />
-		<c:SimplePager ui:field="registerTablePager" /> -->
-		This is the register view!!
-		It You can see it it means that it works!
+		<c:CellTable ui:field="registerTable" />
+		<c:SimplePager ui:field="registerTablePager" />
 	</g:HTMLPanel>
 </ui:UiBinder> 

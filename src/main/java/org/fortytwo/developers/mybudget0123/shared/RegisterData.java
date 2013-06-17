@@ -11,8 +11,10 @@ public class RegisterData implements IsSerializable {
 	private Date date;
 	private List<String> tags;
 	private String comment;
+	private RegisterID registerID;
 	
-	public RegisterData(CashFlow cashFlow, Date date, List<String> tags, String comment) {
+	public RegisterData(RegisterID registerID, CashFlow cashFlow, Date date, List<String> tags, String comment) {
+		this.registerID = registerID;
 		this.cashFlow = cashFlow;
 		this.date = date;
 		this.tags = new ArrayList<String>(tags);
@@ -29,5 +31,9 @@ public class RegisterData implements IsSerializable {
 
 	public String getComment() {
 		return comment;
+	}
+	
+	public RegisterID getRegisterID() {
+		return registerID;
 	}
 }

@@ -1,4 +1,4 @@
-package org.fortytwo.developer.mybudget0123.client.view;
+package org.fortytwo.developers.mybudget0123.client.view;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.uibinder.client.UiBinder;

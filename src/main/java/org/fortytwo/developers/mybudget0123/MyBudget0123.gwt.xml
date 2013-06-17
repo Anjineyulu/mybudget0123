@@ -27,18 +27,18 @@
 
 
 	<!-- Specify the app entry point class. -->
-	<entry-point class='org.fortytwo.developer.mybudget0123.client.MyBudget0123' />
+	<entry-point class='org.fortytwo.developers.mybudget0123.client.MyBudget0123' />
 
 	<!-- Specify the paths for translatable code -->
 	<source path='client' />
 	<source path='shared' />
 
-	<replace-with class='org.fortytwo.developer.mybudget0123.client.ClientFactoryImpl'>
-		<when-type-is class='org.fortytwo.developer.mybudget0123.client.ClientFactory' />
+	<replace-with class='org.fortytwo.developers.mybudget0123.client.ClientFactoryImpl'>
+		<when-type-is class='org.fortytwo.developers.mybudget0123.client.ClientFactory' />
 	</replace-with>
 
 	<!-- Views mapping -->
-	<replace-with class='org.fortytwo.developer.mybudget0123.client.view.RegisterViewDefault'>
-		<when-type-is class='org.fortytwo.developer.mybudget0123.client.view.RegisterView' />
+	<replace-with class='org.fortytwo.developers.mybudget0123.client.view.RegisterViewDefault'>
+		<when-type-is class='org.fortytwo.developers.mybudget0123.client.view.RegisterView' />
 	</replace-with>
 </module>
