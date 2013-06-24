@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Random;
+import java.util.logging.Logger;
 
 import org.fortytwo.developers.mybudget0123.client.DataProvider;
 import org.fortytwo.developers.mybudget0123.shared.CashFlow;
@@ -15,9 +16,12 @@ import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
 @SuppressWarnings("serial")
 public class DataProviderImpl extends RemoteServiceServlet implements DataProvider {
-
+	private static final Logger logger = Logger.getLogger(DataProviderImpl.class.toString());
+	
 	@Override
 	public List<RegisterData> getRegisterData(RegisterID registerID) {
+		logger.info(null == registerID ? "RegisterID NULL!!" : registerID.getID());
+		
 		ArrayList<RegisterData> data = new ArrayList<RegisterData>();
 		
 		Random rand = new Random();

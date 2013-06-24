@@ -43,6 +43,8 @@ public class WelcomeActivity extends AbstractActivity {
 
 						@Override
 						public void onSuccess(RegisterID arg0) {
+							logger.info(Boolean.toString(null == arg0));
+							logger.info(arg0.getID());
 							clientFactory.getPlaceController().goTo(new RegisterPlace(arg0));
 						}
 					});

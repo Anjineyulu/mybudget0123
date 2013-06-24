@@ -19,7 +19,9 @@ public class RegisterData implements IsSerializable {
 		this.registerID = registerID;
 		this.cashFlow = cashFlow;
 		this.date = date;
-		this.tags = new ArrayList<String>(tags);
+		this.tags = new ArrayList<String>();
+		if (null != tags)
+			this.tags.addAll(tags);
 		this.comment = comment;
 	}
 	

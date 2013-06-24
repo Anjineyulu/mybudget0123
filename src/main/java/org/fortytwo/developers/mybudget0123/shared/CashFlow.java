@@ -11,6 +11,8 @@ public class CashFlow implements IsSerializable {
 	private Type type;
 	private Double amount;
 	
+	CashFlow(){}
+	
 	public CashFlow(Type type, Double amount) {
 		this.type = type;
 		this.amount = amount;

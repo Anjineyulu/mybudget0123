@@ -22,7 +22,7 @@ import com.google.gwt.view.client.ListDataProvider;
 public class RegisterViewDefault extends Composite implements RegisterView {
 	@UiField(provided = true)
 	CellTable<RegisterData> registerTable;
-	@UiField
+	@UiField(provided = true)
 	SimplePager registerTablePager;
 	
 	private ListDataProvider<RegisterData> registerDP;
@@ -72,6 +72,7 @@ public class RegisterViewDefault extends Composite implements RegisterView {
 		registerTable.addColumn(flowColumn, "Amount");
 		registerTable.addColumn(authorColumn, "Author");
 		registerTable.addColumn(commentColumn, "Comment");
+		registerTablePager = new SimplePager();
 		
 		initWidget(uiBinder.createAndBindUi(this));
 		

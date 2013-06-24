@@ -9,12 +9,10 @@ public class CashFlowCell extends AbstractCell<CashFlow> {
 
 	@Override
 	public void render(Context context,	CashFlow data, SafeHtmlBuilder html) {
-		html.appendHtmlConstant("<span class=\"");
 		if (data.isTake())
-			html.appendHtmlConstant("take");
+			html.appendHtmlConstant("<span class=\"take\">");
 		else
-			html.appendHtmlConstant("give");
-		html.appendHtmlConstant("\">");
+			html.appendHtmlConstant("<span class=\"give\">");
 		html.append(data.getAmount());
 		html.appendHtmlConstant("</span>");
 	}
