@@ -13,7 +13,7 @@
 
   <servlet-mapping>
     <servlet-name>dataProvider</servlet-name>
-    <url-pattern>data</url-pattern>
+    <url-pattern>/MyBudget0123/data</url-pattern>
   </servlet-mapping>
   
     <servlet>
@@ -23,7 +23,7 @@
 
   <servlet-mapping>
     <servlet-name>loginService</servlet-name>
-    <url-pattern>MyBudget0123/login</url-pattern>
+    <url-pattern>/MyBudget0123/login</url-pattern>
   </servlet-mapping>
 
   <!-- Default page to serve -->
