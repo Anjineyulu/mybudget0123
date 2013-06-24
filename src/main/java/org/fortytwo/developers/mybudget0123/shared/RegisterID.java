@@ -5,6 +5,8 @@ import com.google.gwt.user.client.rpc.IsSerializable;
 public class RegisterID implements IsSerializable {
 	private String id;
 	
+	public RegisterID(){}
+	
 	public RegisterID(String id) {
 		this.id = id;
 	}

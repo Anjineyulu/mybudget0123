@@ -10,6 +10,8 @@ import com.google.web.bindery.event.shared.SimpleEventBus;
 public class ClientFactoryImpl implements ClientFactory {
 	private static final EventBus eventBus = new SimpleEventBus();
 	private static final PlaceController placeController = new PlaceController(eventBus);
+	private static final DataProviderAsync dataProvider = GWT.create(DataProvider.class);
+	private static final LoginServiceAsync loginService = GWT.create(LoginService.class);
 	
 	// views
 	private RegisterView registerView;
@@ -30,6 +32,16 @@ public class ClientFactoryImpl implements ClientFactory {
 			registerView = GWT.create(RegisterView.class);
 		
 		return registerView;
+	}
+
+	@Override
+	public DataProviderAsync getDataProvider() {
+		return dataProvider;
+	}
+	
+	@Override
+	public LoginServiceAsync getLoginService() {
+		return loginService;
 	}
 
 }

@@ -8,6 +8,11 @@ import com.google.web.bindery.event.shared.EventBus;
 public interface ClientFactory {
 	EventBus getEventBus();
 	PlaceController getPlaceController();
-	RegisterView getRegisterView();
+	
 	DataProviderAsync getDataProvider();
+	LoginServiceAsync getLoginService();
+	
+	//WelcomeView getWelcomeView();
+	RegisterView getRegisterView();
+	
 }

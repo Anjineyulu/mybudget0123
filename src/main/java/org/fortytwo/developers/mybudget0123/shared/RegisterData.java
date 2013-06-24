@@ -13,6 +13,8 @@ public class RegisterData implements IsSerializable {
 	private String comment;
 	private RegisterID registerID;
 	
+	public RegisterData(){}
+	
 	public RegisterData(RegisterID registerID, CashFlow cashFlow, Date date, List<String> tags, String comment) {
 		this.registerID = registerID;
 		this.cashFlow = cashFlow;

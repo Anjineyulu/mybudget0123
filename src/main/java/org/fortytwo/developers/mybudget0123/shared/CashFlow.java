@@ -23,4 +23,8 @@ public class CashFlow implements IsSerializable {
 	public Double getAmount() {
 		return amount;
 	}
+	
+	public boolean isTake() {
+		return type.equals(Type.TAKE);
+	}
 }
