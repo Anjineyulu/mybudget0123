@@ -58,51 +58,40 @@
 			<scope>test</scope>
 		</dependency>
 		<dependency>
-			<!-- Google App Engine supports both JPA1 and JPA2. JPA1: datanucleus 
-				appengine plugin v1 (1.0.10) + datanucleus v1 (1.1.5) JPA2: datanucleus appengine 
-				plugin v2 (2.1.1) + datanucleus v3 (3.1.1) -->
 			<groupId>com.google.appengine.orm</groupId>
 			<artifactId>datanucleus-appengine</artifactId>
-			<version>2.1.1</version>
+			<version>2.1.2</version>
 		</dependency>
 		<dependency>
-		 <!-- Google App Engine supports both JPA1 and JPA2.
-   JPA1: datanucleus appengine plugin v1 (1.0.10) + datanucleus v1 (1.1.5)
-   JPA2: datanucleus appengine plugin v2 (2.1.1) + datanucleus v3 (3.1.1) -->
-         <groupId>com.google.appengine.orm</groupId>
-         <artifactId>datanucleus-appengine</artifactId>
-         <version>1.0.10</version>
-      </dependency>
-      <dependency>
-         <!-- datanucleus-core is not needed for compilation. in fact, it cannot have compile 
-   scope because the datanucleus plugin automatically adds it during enhancement and complains
-   if there are two copies. app should not depend on any classes in this lib anyways. -->
-         <groupId>org.datanucleus</groupId>
-         <artifactId>datanucleus-core</artifactId>
-         <version>${datanucleusVersion}</version>
-         <scope>runtime</scope>
-         <exclusions>
-            <exclusion>
-               <groupId>javax.transaction</groupId>
-               <artifactId>transaction-api</artifactId>
-            </exclusion>
-         </exclusions>
-      </dependency>
-      <dependency>
-         <!-- normally this library is only needed when using JDO however datanucleus throws 
-   some JDO exceptions even when using JPA. there are several places in our code that 
-   explicitly catch these JDO exceptions therefore it is needed during compilation -->
-         <groupId>javax.jdo</groupId>
-         <artifactId>jdo2-api</artifactId>
-         <version>2.3-eb</version>
-         <exclusions>
-            <exclusion>
-               <groupId>javax.transaction</groupId>
-               <artifactId>transaction-api</artifactId>
-            </exclusion>
-         </exclusions>
-      </dependency>
-      <!-- End Google App Engine libraries -->
+			<!-- datanucleus-core is not needed for compilation. in fact, it cannot 
+				have compile scope because the datanucleus plugin automatically adds it during 
+				enhancement and complains if there are two copies. app should not depend 
+				on any classes in this lib anyways. -->
+			<groupId>org.datanucleus</groupId>
+			<artifactId>datanucleus-core</artifactId>
+			<version>${datanucleusVersion}</version>
+			<scope>runtime</scope>
+			<exclusions>
+				<exclusion>
+					<groupId>javax.transaction</groupId>
+					<artifactId>transaction-api</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>javax.jdo</groupId>
+			<!-- <artifactId>jdo2-api</artifactId>
+			<version>2.3-eb</version> -->
+			<artifactId>jdo-api</artifactId>
+			<version>3.0.1</version>
+			<exclusions>
+				<exclusion>
+					<groupId>javax.transaction</groupId>
+					<artifactId>transaction-api</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<!-- End Google App Engine libraries -->
 		<!-- GWT Dependencies -->
 		<dependency>
 			<groupId>com.google.gwt</groupId>
