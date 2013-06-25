@@ -3,5 +3,10 @@
   <application>mybudget0123</application>
   <version>1</version>
   
-  
+  <threadsafe>true</threadsafe>
+  <sessions-enabled>true</sessions-enabled>
+  <static-files>
+      <include path="**.html" />
+      <include path="**.css" />
+  </static-files>
 </appengine-web-app>
