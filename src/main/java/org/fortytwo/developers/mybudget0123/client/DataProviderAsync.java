@@ -9,4 +9,8 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 
 public interface DataProviderAsync {
 	void getRegisterData(RegisterID registerID, AsyncCallback<List<RegisterData>> callback);
+
+	void addRegisterData(RegisterData data, AsyncCallback<Void> callback);
+
+	void generateData(AsyncCallback<Void> callback);
 }

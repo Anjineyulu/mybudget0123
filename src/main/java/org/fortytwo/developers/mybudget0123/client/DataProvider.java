@@ -11,4 +11,8 @@ import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 @RemoteServiceRelativePath("data")
 public interface DataProvider extends RemoteService {
 	List<RegisterData> getRegisterData(RegisterID registerID);
+
+	void addRegisterData(RegisterData data);
+
+	void generateData();
 }

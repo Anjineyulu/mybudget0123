@@ -6,7 +6,10 @@ import java.util.List;
 import java.util.Random;
 import java.util.logging.Logger;
 
+import javax.jdo.PersistenceManager;
+
 import org.fortytwo.developers.mybudget0123.client.DataProvider;
+import org.fortytwo.developers.mybudget0123.server.data.PMF;
 import org.fortytwo.developers.mybudget0123.shared.CashFlow;
 import org.fortytwo.developers.mybudget0123.shared.CashFlow.Type;
 import org.fortytwo.developers.mybudget0123.shared.RegisterData;
@@ -17,6 +20,24 @@ import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 @SuppressWarnings("serial")
 public class DataProviderImpl extends RemoteServiceServlet implements DataProvider {
 	private static final Logger logger = Logger.getLogger(DataProviderImpl.class.toString());
+	
+	
+	@Override
+	public void addRegisterData(RegisterData data) {
+		PersistenceManager pm = PMF.get().getPersistenceManager();
+		try {
+			pm.currentTransaction().begin();
+			pm.makePersistent(data);
+			pm.currentTransaction().commit();
+		} finally {
+			pm.close();
+		}
+	}
+	
+	@Override
+	public void generateData() {
+		
+	}
 	
 	@Override
 	public List<RegisterData> getRegisterData(RegisterID registerID) {

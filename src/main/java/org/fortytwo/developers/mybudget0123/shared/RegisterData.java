@@ -1,16 +1,32 @@
 package org.fortytwo.developers.mybudget0123.shared;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import com.google.gwt.user.client.rpc.IsSerializable;
+import javax.jdo.annotations.IdGeneratorStrategy;
+import javax.jdo.annotations.PersistenceCapable;
+import javax.jdo.annotations.Persistent;
+import javax.jdo.annotations.PrimaryKey;
 
-public class RegisterData implements IsSerializable {
-	private CashFlow cashFlow; 
+import com.google.appengine.api.datastore.Key;
+
+@SuppressWarnings("serial")
+@PersistenceCapable
+public class RegisterData implements Serializable {
+	@PrimaryKey
+	@Persistent(valueStrategy = IdGeneratorStrategy.IDENTITY)
+	private Key key;
+	@Persistent
+	private CashFlow cashFlow;
+	@Persistent
 	private Date date;
+	@Persistent
 	private List<String> tags;
+	@Persistent
 	private String comment;
+	@Persistent
 	private RegisterID registerID;
 	
 	public RegisterData(){}
@@ -39,5 +55,9 @@ public class RegisterData implements IsSerializable {
 	
 	public RegisterID getRegisterID() {
 		return registerID;
+	}
+	
+	public Key getKey() {
+		return key;
 	}
 }
