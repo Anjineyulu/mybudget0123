@@ -14,7 +14,7 @@
 		<!-- Convenience property to set the GAE version -->
 		<gaeVersion>1.8.1.1</gaeVersion>
 		<gaeHome>/Applications/eclipse/plugins/com.google.appengine.eclipse.sdkbundle_1.8.1.1/appengine-java-sdk-1.8.1.1</gaeHome>
-		<datanucleusVersion>3.2.4</datanucleusVersion>
+		<datanucleusVersion>2.2.1</datanucleusVersion>
 		<!-- Convenience property to set the GWT version -->
 		<gwtVersion>2.5.1</gwtVersion>
 		<!-- GWT needs at least java 1.5 -->
@@ -58,38 +58,30 @@
 			<scope>test</scope>
 		</dependency>
 		<dependency>
+			<groupId>javax.jdo</groupId>
+			<artifactId>jdo-api</artifactId>
+			<version>3.0.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.datanucleus</groupId>
+			<artifactId>datanucleus-core</artifactId>
+			<version>3.1.1</version>
+			<scope>runtime</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.datanucleus</groupId>
+			<artifactId>datanucleus-api-jdo</artifactId>
+			<version>3.1.2</version>
+		</dependency>
+		<dependency>
 			<groupId>com.google.appengine.orm</groupId>
 			<artifactId>datanucleus-appengine</artifactId>
 			<version>2.1.2</version>
 		</dependency>
 		<dependency>
-			<!-- datanucleus-core is not needed for compilation. in fact, it cannot 
-				have compile scope because the datanucleus plugin automatically adds it during 
-				enhancement and complains if there are two copies. app should not depend 
-				on any classes in this lib anyways. -->
-			<groupId>org.datanucleus</groupId>
-			<artifactId>datanucleus-core</artifactId>
-			<version>${datanucleusVersion}</version>
-			<scope>runtime</scope>
-			<exclusions>
-				<exclusion>
-					<groupId>javax.transaction</groupId>
-					<artifactId>transaction-api</artifactId>
-				</exclusion>
-			</exclusions>
-		</dependency>
-		<dependency>
-			<groupId>javax.jdo</groupId>
-			<!-- <artifactId>jdo2-api</artifactId>
-			<version>2.3-eb</version> -->
-			<artifactId>jdo-api</artifactId>
-			<version>3.0.1</version>
-			<exclusions>
-				<exclusion>
-					<groupId>javax.transaction</groupId>
-					<artifactId>transaction-api</artifactId>
-				</exclusion>
-			</exclusions>
+			<groupId>com.google.appengine.orm</groupId>
+			<artifactId>datanucleus-appengine</artifactId>
+			<version>2.1.2</version>
 		</dependency>
 		<!-- End Google App Engine libraries -->
 		<!-- GWT Dependencies -->
@@ -250,43 +242,24 @@
 						</lifecycleMappingMetadata>
 					</configuration>
 				</plugin>
+
 				<plugin>
 					<groupId>org.datanucleus</groupId>
 					<artifactId>maven-datanucleus-plugin</artifactId>
-					<version>1.1.4</version>
+					<version>3.1.2</version>
 					<configuration>
-						<api>JDO</api>
-						<!-- <mappingIncludes>org/styleguise/marketplace/core/shared/**/*.class, 
-							net/styleguise/marketplace/server/**/*.class</mappingIncludes> -->
-						<verbose>true</verbose>
+						<!-- <log4jConfiguration>${basedir}/log4j.properties</log4jConfiguration> -->
+						<verbose>false</verbose>
+						<fork>false</fork>
 					</configuration>
 					<executions>
 						<execution>
-							<!-- classes get enhanced immediately after compile phase -->
 							<phase>process-classes</phase>
 							<goals>
 								<goal>enhance</goal>
 							</goals>
 						</execution>
 					</executions>
-					<dependencies>
-						<dependency>
-							<!-- enhancement requires the gwt-user jar because many of the entity 
-								classes implement IsSerializable and the enhancer needs it on the classpath 
-								to function. because the gwt-user library has a scope of provided, it is 
-								only available on the compilation and test classpath, and is not transitive 
-								to the ehancement classpath. -->
-							<groupId>com.google.gwt</groupId>
-							<artifactId>gwt-user</artifactId>
-							<version>${gwtVersion}</version>
-						</dependency>
-						<dependency>
-							<!-- force maven-datanucleus-plugin to use the same version of datanucleus-core -->
-							<groupId>org.datanucleus</groupId>
-							<artifactId>datanucleus-core</artifactId>
-							<version>${datanucleusVersion}</version>
-						</dependency>
-					</dependencies>
 				</plugin>
 			</plugins>
 		</pluginManagement>
