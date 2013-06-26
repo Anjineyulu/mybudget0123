@@ -7,14 +7,12 @@ import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
 import javax.jdo.annotations.PrimaryKey;
 
-import com.google.appengine.api.datastore.Key;
-
 @SuppressWarnings("serial")
 @PersistenceCapable
 public class RegisterID implements Serializable {
 	@PrimaryKey
 	@Persistent(valueStrategy = IdGeneratorStrategy.IDENTITY)
-	private Key key;
+	private Long key;
 	
 	@Persistent
 	private String id;
@@ -32,5 +30,9 @@ public class RegisterID implements Serializable {
 	@Override
 	public String toString() {
 		return id;
+	}
+	
+	public Long getKey() {
+		return key;
 	}
 }

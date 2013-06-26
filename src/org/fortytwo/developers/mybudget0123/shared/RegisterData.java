@@ -10,14 +10,12 @@ import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
 import javax.jdo.annotations.PrimaryKey;
 
-import com.google.appengine.api.datastore.Key;
-
 @SuppressWarnings("serial")
 @PersistenceCapable
 public class RegisterData implements Serializable {
 	@PrimaryKey
 	@Persistent(valueStrategy = IdGeneratorStrategy.IDENTITY)
-	private Key key;
+	private Long key;
 	@Persistent
 	private CashFlow cashFlow;
 	@Persistent
@@ -57,7 +55,7 @@ public class RegisterData implements Serializable {
 		return registerID;
 	}
 	
-	public Key getKey() {
+	public Long getKey() {
 		return key;
 	}
 }

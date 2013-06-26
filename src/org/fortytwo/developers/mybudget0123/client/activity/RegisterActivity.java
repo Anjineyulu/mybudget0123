@@ -9,12 +9,16 @@ import org.fortytwo.developers.mybudget0123.client.view.RegisterView;
 import org.fortytwo.developers.mybudget0123.shared.RegisterData;
 
 import com.google.gwt.activity.shared.AbstractActivity;
+import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.uibinder.client.UiField;
+import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.user.cellview.client.CellTable;
 import com.google.gwt.user.cellview.client.SimplePager;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.AcceptsOneWidget;
+import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.view.client.ListDataProvider;
 
 public class RegisterActivity extends AbstractActivity {
@@ -55,6 +59,24 @@ public class RegisterActivity extends AbstractActivity {
 		});
 		
 		widget.setWidget(view);
+	}
+	
+	@UiHandler("generateBtn")
+	void onGenerateClick(ClickEvent event) {
+		logger.info("generateBtn clicked!");
+		clientFactory.getDataProvider().generateData(new AsyncCallback<Void>() {
+
+			@Override
+			public void onFailure(Throwable caught) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void onSuccess(Void result) {
+				Window.alert("Generated");
+			}
+		});
 	}
 
 }

@@ -24,6 +24,7 @@ public class DataProviderImpl extends RemoteServiceServlet implements DataProvid
 	
 	@Override
 	public void addRegisterData(RegisterData data) {
+		logger.info("Storing " + data.toString());
 		PersistenceManager pm = PMF.get().getPersistenceManager();
 		try {
 			pm.currentTransaction().begin();
@@ -36,7 +37,12 @@ public class DataProviderImpl extends RemoteServiceServlet implements DataProvid
 	
 	@Override
 	public void generateData() {
-		
+		logger.info("generating 100 fake data");
+		Random rand = new Random();
+		for (int i = 0; i < 100; ++i) {
+			CashFlow cf = new CashFlow(rand.nextBoolean() ? Type.TAKE : Type.GIVE, 100 * rand.nextDouble());
+			addRegisterData(new RegisterData(new RegisterID("test123"), cf, new Date(), null, "test data"));
+		}
 	}
 	
 	@Override
