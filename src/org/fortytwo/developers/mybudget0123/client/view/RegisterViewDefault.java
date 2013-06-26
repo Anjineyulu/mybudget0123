@@ -5,10 +5,8 @@ import java.util.List;
 
 import org.fortytwo.developers.mybudget0123.client.view.cell.CashFlowCell;
 import org.fortytwo.developers.mybudget0123.shared.CashFlow;
-import org.fortytwo.developers.mybudget0123.shared.RegisterData;
 
 import com.google.gwt.cell.client.DateCell;
-import com.google.gwt.cell.client.TextCell;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.uibinder.client.UiBinder;
@@ -23,11 +21,11 @@ import com.google.gwt.view.client.ListDataProvider;
 
 public class RegisterViewDefault extends Composite implements RegisterView {
 	@UiField(provided = true)
-	CellTable<RegisterData> registerTable;
+	CellTable<CashFlow> registerTable;
 	@UiField(provided = true)
 	SimplePager registerTablePager;
 	
-	private ListDataProvider<RegisterData> registerDP;
+	private ListDataProvider<CashFlow> registerDP;
 	private Presenter presenter;
 	
 	private static RegisterViewDefaultUiBinder uiBinder = GWT .create(RegisterViewDefaultUiBinder.class);
@@ -37,29 +35,29 @@ public class RegisterViewDefault extends Composite implements RegisterView {
 	}
 
 	public RegisterViewDefault() {
-		registerTable = new CellTable<RegisterData>();
-		Column<RegisterData, Date> dateColumn = new Column<RegisterData, Date>(new DateCell()) {
+		registerTable = new CellTable<CashFlow>();
+		Column<CashFlow, Date> dateColumn = new Column<CashFlow, Date>(new DateCell()) {
 			@Override
-			public Date getValue(RegisterData data) {
+			public Date getValue(CashFlow data) {
 				if (null == data) return null;
 				
 				return data.getDate();
 			}
 		};
 		
-		Column<RegisterData, CashFlow> flowColumn = new Column<RegisterData, CashFlow>(new CashFlowCell()) {
+		Column<CashFlow, CashFlow> flowColumn = new Column<CashFlow, CashFlow>(new CashFlowCell()) {
 			@Override
-			public CashFlow getValue(RegisterData data) {
+			public CashFlow getValue(CashFlow data) {
 				if (null == data) return null;
-				return data.getCashFlow();
+				return data;
 			}
 		};
-		Column<RegisterData, String> authorColumn = new Column<RegisterData, String>(new TextCell()) {
+		/*Column<CashFlow, String> authorColumn = new Column<CashFlow, String>(new TextCell()) {
 
 			@Override
-			public String getValue(RegisterData data) {
+			public String getValue(CashFlow data) {
 				if (null == data) return null;
-				return data.getRegisterID().toString();
+				return data..toString();
 			}
 		};
 		Column<RegisterData, String> commentColumn = new Column<RegisterData, String>(new TextCell()) {
@@ -69,17 +67,17 @@ public class RegisterViewDefault extends Composite implements RegisterView {
 				if (null == data) return null;
 				return data.getComment();
 			}
-		};
+		};*/
 		
 		registerTable.addColumn(dateColumn, "Date");
 		registerTable.addColumn(flowColumn, "Amount");
-		registerTable.addColumn(authorColumn, "Author");
-		registerTable.addColumn(commentColumn, "Comment");
+//		registerTable.addColumn(authorColumn, "Author");
+//		registerTable.addColumn(commentColumn, "Comment");
 		registerTablePager = new SimplePager();
 		
 		initWidget(uiBinder.createAndBindUi(this));
 		
-		registerDP = new ListDataProvider<RegisterData>();
+		registerDP = new ListDataProvider<CashFlow>();
 		registerDP.addDataDisplay(registerTable);
 		registerTablePager.setDisplay(registerTable);
 	}

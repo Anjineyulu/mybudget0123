@@ -5,9 +5,7 @@ import java.util.logging.Logger;
 import org.fortytwo.developers.mybudget0123.client.ClientFactory;
 import org.fortytwo.developers.mybudget0123.client.place.ListRegistersPlace;
 import org.fortytwo.developers.mybudget0123.client.place.LoginPlace;
-import org.fortytwo.developers.mybudget0123.client.place.RegisterPlace;
 import org.fortytwo.developers.mybudget0123.client.place.WelcomePlace;
-import org.fortytwo.developers.mybudget0123.shared.RegisterID;
 
 import com.google.gwt.activity.shared.AbstractActivity;
 import com.google.gwt.event.shared.EventBus;

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Random;
+import java.util.Set;
 import java.util.logging.Logger;
 
 import javax.jdo.PersistenceManager;
@@ -24,14 +25,12 @@ import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 public class DataProviderImpl extends RemoteServiceServlet implements DataProvider {
 	private static final Logger logger = Logger.getLogger(DataProviderImpl.class.toString());
 	
-	
 	@Override
-	public void addRegisterData(Double amount, boolean isGive, Date date, RegisterInfo register) {
-		logger.info("Storing " + data.toString());
+	public void addRegisterData(Double amount, CashFlow.Type type, Date date, RegisterInfo register) {
 		PersistenceManager pm = PMF.get().getPersistenceManager();
 		try {
 			pm.currentTransaction().begin();
-			pm.makePersistent(data);
+			pm.makePersistent(new CashFlow(type, amount, date, register.getKey()));
 			pm.currentTransaction().commit();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -42,38 +41,45 @@ public class DataProviderImpl extends RemoteServiceServlet implements DataProvid
 	}
 	
 	@Override
-	public void generateData() {
-		logger.info("generating 100 fake data");
-		Random rand = new Random();
-		for (int i = 0; i < 1; ++i) {
-			CashFlow cf = new CashFlow(rand.nextBoolean() ? Type.TAKE : Type.GIVE, 100 * rand.nextDouble());
-			addRegisterData(new RegisterData(new RegisterID("test123"), cf, new Date(), null, "test data"));
-		}
-	}
-	
-	@Override
-	public List<RegisterData> getRegisterData(RegisterID registerID) {
-		logger.info(null == registerID ? "RegisterID NULL!!" : registerID.getID());
-		
-		ArrayList<RegisterData> data = new ArrayList<RegisterData>();
+	public List<CashFlow> getRegisterData(Long registerID) {
+		ArrayList<CashFlow> data = new ArrayList<CashFlow>();
 		
 		Random rand = new Random();
 		
 		for (int i = 0; i < 100; ++i) {
-			CashFlow cf = new CashFlow(rand.nextBoolean() ? Type.TAKE : Type.GIVE, 100 * rand.nextDouble());
-			data.add(new RegisterData(registerID, cf, new Date(), null, "test data"));
+			data.add(new CashFlow(rand.nextBoolean() ? Type.TAKE : Type.GIVE, 100 * rand.nextDouble(), new Date(), registerID));
 		}
 		
 		return data;
 	}
+	
+	@Override
+	public Long createRegister(String email, String name) {
+		PersistenceManager pm = null;
 
+		try {
+			pm = PMF.get().getPersistenceManager();
+			
+			RegisterInfo regInfo = new RegisterInfo(email, name, null);
+			pm.currentTransaction().begin();
+			regInfo = pm.makePersistent(regInfo);
+			return regInfo.getKey();
+		} catch (RuntimeException e) {
+			throw e;
+		} finally {
+			if (pm.currentTransaction().isActive())
+				pm.currentTransaction().commit();
+			
+			pm.close();
+		}
+	}
+
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<RegisterInfo> getRegisterList(String email) {
-		ArrayList<RegisterInfo> list = new ArrayList<RegisterInfo>();
-		
-		
+		PersistenceManager pm = null;
 		try {
-			PersistenceManager pm = PMF.get().getPersistenceManager();
+			pm = PMF.get().getPersistenceManager();
 			
 			ArrayList<Filter> filters = new ArrayList<Filter>();
 			filters.add(new FilterPredicate("owner", FilterOperator.EQUAL, email));
@@ -81,16 +87,15 @@ public class DataProviderImpl extends RemoteServiceServlet implements DataProvid
 			Query query = pm.newQuery("RegisterInfo");
 			query.setFilter("owner == " + email);
 			
-			
-			/*for (RegisterData data : (List<RegisterData>) query.execute()) {
-				
-			}*/
+			return (List<RegisterInfo>) query.execute();
 		} finally {
-			
+			pm.close();
 		}
-				
-				
-		return list;
+	}
+
+	@Override
+	public List<RegisterInfo> deleteRegisters(Set<RegisterInfo> selectedForDeletion, String email) {
+		return null;
 	}
 	
 }

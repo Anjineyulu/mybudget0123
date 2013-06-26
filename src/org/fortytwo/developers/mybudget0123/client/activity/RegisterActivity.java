@@ -6,14 +6,13 @@ import java.util.logging.Logger;
 import org.fortytwo.developers.mybudget0123.client.ClientFactory;
 import org.fortytwo.developers.mybudget0123.client.place.RegisterPlace;
 import org.fortytwo.developers.mybudget0123.client.view.RegisterView;
-import org.fortytwo.developers.mybudget0123.shared.RegisterData;
+import org.fortytwo.developers.mybudget0123.shared.CashFlow;
 
 import com.google.gwt.activity.shared.AbstractActivity;
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.cellview.client.CellTable;
 import com.google.gwt.user.cellview.client.SimplePager;
-import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.AcceptsOneWidget;
 import com.google.gwt.view.client.ListDataProvider;
@@ -26,11 +25,11 @@ public class RegisterActivity extends AbstractActivity implements RegisterView.P
 	private RegisterView view;
 	
 	@UiField(provided=true)
-	CellTable<RegisterData> registerTable;
+	CellTable<CashFlow> registerTable;
 	@UiField
 	SimplePager registerTablePager;
 	
-	ListDataProvider<RegisterData> registerDataProvider;
+	ListDataProvider<CashFlow> registerDataProvider;
 
 	public RegisterActivity(RegisterPlace place, ClientFactory clientFactory) {
 		this.place = place;
@@ -43,10 +42,10 @@ public class RegisterActivity extends AbstractActivity implements RegisterView.P
 		logger.info("starting");
 		view.setPresenter(this);
 		
-		clientFactory.getDataProvider().getRegisterData(place.getRegisterID(), new AsyncCallback<List<RegisterData>>() {
+		clientFactory.getDataProvider().getRegisterData(place.getRegisterID(), new AsyncCallback<List<CashFlow>>() {
 			
 			@Override
-			public void onSuccess(List<RegisterData> data) {
+			public void onSuccess(List<CashFlow> data) {
 				view.setData(data);
 			}
 			
@@ -61,18 +60,6 @@ public class RegisterActivity extends AbstractActivity implements RegisterView.P
 	
 	@Override
 	public void onGenerate() {
-		clientFactory.getDataProvider().generateData(new AsyncCallback<Void>() {
-			@Override
-			public void onFailure(Throwable caught) {
-				// TODO Auto-generated method stub
-				
-			}
-
-			@Override
-			public void onSuccess(Void result) {
-				Window.alert("Done!");
-			}
-			
-		});
+		
 	}
 }

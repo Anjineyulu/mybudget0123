@@ -1,6 +1,8 @@
 package org.fortytwo.developers.mybudget0123.shared;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import javax.jdo.annotations.IdGeneratorStrategy;
@@ -21,11 +23,23 @@ public class RegisterInfo implements Serializable {
 	private String description;
 	
 	@Persistent
+	private String name;
+	
+	@Persistent
 	private List<String> authorizedUsers;
 	
 	RegisterInfo(){}
-	public RegisterInfo(String email) {
+	
+	public RegisterInfo(String email, String name, String description) {
 		this.email = email;
+		this.name = name;
+		this.description = description;
+		this.authorizedUsers = new ArrayList<String>();
+	}
+	
+	public RegisterInfo(String email, String name, String description, Collection<String> authorizedUsers) {
+		this(email, name, description);
+		authorizedUsers.addAll(authorizedUsers);
 	}
 	
 	public String getEmail() {
@@ -34,5 +48,26 @@ public class RegisterInfo implements Serializable {
 	
 	public Long getKey() {
 		return key;
+	}
+	
+	public String getDescription() {
+		return description;
+	}
+	
+	public String getName() {
+		return name;
+	}
+	
+	public List<String> getAuthorizedUsers() {
+		return authorizedUsers;
+	}
+	
+	public void authorize(String email) {
+		if (!authorizedUsers.contains(email))
+			authorizedUsers.add(email);
+	}
+	
+	public void unauthorize(String email) {
+		authorizedUsers.remove(email);
 	}
 }
