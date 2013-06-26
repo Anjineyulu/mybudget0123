@@ -17,5 +17,5 @@ public interface DataProvider extends RemoteService {
 	void addRegisterData(Double amount, Type type, Date date, RegisterInfo register);
 	List<CashFlow> getRegisterData(Long registerID);
 	Long createRegister(String email, String name);
-	List<RegisterInfo> deleteRegisters(Set<RegisterInfo> selectedForDeletion, String email);
+	void deleteRegisters(Set<RegisterInfo> selectedForDeletion, String email);
 }

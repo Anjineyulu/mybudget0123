@@ -16,9 +16,6 @@ import org.fortytwo.developers.mybudget0123.shared.CashFlow;
 import org.fortytwo.developers.mybudget0123.shared.CashFlow.Type;
 import org.fortytwo.developers.mybudget0123.shared.RegisterInfo;
 
-import com.google.appengine.api.datastore.Query.Filter;
-import com.google.appengine.api.datastore.Query.FilterOperator;
-import com.google.appengine.api.datastore.Query.FilterPredicate;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
 @SuppressWarnings("serial")
@@ -55,6 +52,7 @@ public class DataProviderImpl extends RemoteServiceServlet implements DataProvid
 	
 	@Override
 	public Long createRegister(String email, String name) {
+		logger.info("Creating " + name + " for " + email);
 		PersistenceManager pm = null;
 
 		try {
@@ -77,25 +75,66 @@ public class DataProviderImpl extends RemoteServiceServlet implements DataProvid
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<RegisterInfo> getRegisterList(String email) {
+		logger.info("Retrieving registers for " + email);
 		PersistenceManager pm = null;
 		try {
 			pm = PMF.get().getPersistenceManager();
 			
-			ArrayList<Filter> filters = new ArrayList<Filter>();
-			filters.add(new FilterPredicate("owner", FilterOperator.EQUAL, email));
-			filters.add(new FilterPredicate("authorized", FilterOperator.IN, email));
-			Query query = pm.newQuery("RegisterInfo");
-			query.setFilter("owner == " + email);
+			Query query = pm.newQuery(RegisterInfo.class);
+			query.setFilter("email == givenEmail");
+			query.declareParameters("String givenEmail");
 			
-			return (List<RegisterInfo>) query.execute();
+			try {
+				List<RegisterInfo> list =  (List<RegisterInfo>) query.execute(email);
+			
+				if (null == list)
+					logger.info("Retrieved null");
+				else
+					logger.info(list.toString());
+				return new ArrayList<RegisterInfo>(list);
+			} finally {
+				query.closeAll();
+			}
 		} finally {
 			pm.close();
 		}
 	}
 
 	@Override
-	public List<RegisterInfo> deleteRegisters(Set<RegisterInfo> selectedForDeletion, String email) {
-		return null;
+	public void deleteRegisters(Set<RegisterInfo> selectedForDeletion, String email) {
+		logger.info("Deleting " + selectedForDeletion + " for " + email);
+		
+		PersistenceManager pm = null;
+		
+		try {
+			pm = PMF.get().getPersistenceManager();
+			pm.currentTransaction().begin();
+			Query delCF = pm.newQuery(CashFlow.class);
+			delCF.setFilter("registerID == givenID");
+			delCF.declareParameters("Long givenID");
+			
+			Query delRI = pm.newQuery(RegisterInfo.class);
+			delRI.setFilter("key == givenKey");
+			delRI.declareParameters("Long givenKey");
+			try {
+				for (RegisterInfo rInfo : selectedForDeletion) {
+					logger.info("- " + rInfo.getKey());
+					delCF.deletePersistentAll(rInfo.getKey());
+					logger.info("--");
+					delRI.deletePersistentAll(rInfo.getKey());
+				}
+				logger.info("done");
+			} finally {
+				delCF.closeAll();
+				delRI.closeAll();
+			}
+		} catch (RuntimeException re) {
+			re.printStackTrace();
+		} finally {
+			if (pm.currentTransaction().isActive())
+				pm.currentTransaction().commit();
+			pm.close();
+		}
 	}
 	
 }

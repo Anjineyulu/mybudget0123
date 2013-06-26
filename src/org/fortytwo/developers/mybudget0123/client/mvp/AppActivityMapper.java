@@ -1,7 +1,7 @@
 package org.fortytwo.developers.mybudget0123.client.mvp;
 
 import org.fortytwo.developers.mybudget0123.client.ClientFactory;
-import org.fortytwo.developers.mybudget0123.client.activity.ListRegisterActivity;
+import org.fortytwo.developers.mybudget0123.client.activity.ListRegistersActivity;
 import org.fortytwo.developers.mybudget0123.client.activity.RegisterActivity;
 import org.fortytwo.developers.mybudget0123.client.activity.WelcomeActivity;
 import org.fortytwo.developers.mybudget0123.client.place.ListRegistersPlace;
@@ -26,7 +26,7 @@ public class AppActivityMapper implements ActivityMapper {
 		if (place instanceof WelcomePlace)
 			return new WelcomeActivity((WelcomePlace) place, clientFactory);
 		if (place instanceof ListRegistersPlace)
-			return new ListRegisterActivity((ListRegistersPlace) place, clientFactory);
+			return new ListRegistersActivity((ListRegistersPlace) place, clientFactory);
 		return null;
 	}
 

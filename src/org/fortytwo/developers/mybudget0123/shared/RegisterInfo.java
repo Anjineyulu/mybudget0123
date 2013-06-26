@@ -25,8 +25,8 @@ public class RegisterInfo implements Serializable {
 	@Persistent
 	private String name;
 	
-	@Persistent
-	private List<String> authorizedUsers;
+	/*@Persistent
+	private List<String> authorizedUsers;*/
 	
 	RegisterInfo(){}
 	
@@ -34,12 +34,12 @@ public class RegisterInfo implements Serializable {
 		this.email = email;
 		this.name = name;
 		this.description = description;
-		this.authorizedUsers = new ArrayList<String>();
+		//this.authorizedUsers = new ArrayList<String>();
 	}
 	
 	public RegisterInfo(String email, String name, String description, Collection<String> authorizedUsers) {
 		this(email, name, description);
-		authorizedUsers.addAll(authorizedUsers);
+		//authorizedUsers.addAll(authorizedUsers);
 	}
 	
 	public String getEmail() {
@@ -58,7 +58,7 @@ public class RegisterInfo implements Serializable {
 		return name;
 	}
 	
-	public List<String> getAuthorizedUsers() {
+	/*public List<String> getAuthorizedUsers() {
 		return authorizedUsers;
 	}
 	
@@ -69,5 +69,10 @@ public class RegisterInfo implements Serializable {
 	
 	public void unauthorize(String email) {
 		authorizedUsers.remove(email);
+	}*/
+	
+	@Override
+	public String toString() {
+		return key.toString();
 	}
 }

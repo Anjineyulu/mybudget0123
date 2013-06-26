@@ -29,7 +29,6 @@ public class WelcomeActivity extends AbstractActivity {
 
 			@Override
 			public void onSuccess(Boolean arg0) {
-				logger.info(arg0.toString());
 				if (arg0) {
 					clientFactory.getLoginService().getRegisterID(new AsyncCallback<String>() {
 
@@ -40,6 +39,7 @@ public class WelcomeActivity extends AbstractActivity {
 
 						@Override
 						public void onSuccess(String arg0) {
+							logger.info("Selected email: " + arg0);
 							clientFactory.getPlaceController().goTo(new ListRegistersPlace(arg0));
 						}
 					});

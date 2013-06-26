@@ -15,6 +15,5 @@ public interface DataProviderAsync {
 	void getRegisterList(String email, AsyncCallback<List<RegisterInfo>> asyncCallback);
 	void getRegisterData(Long registerID, AsyncCallback<List<CashFlow>> callback);
 	void createRegister(String email, String name, AsyncCallback<Long> callback);
-	void deleteRegisters(Set<RegisterInfo> selectedForDeletion, String email,
-			AsyncCallback<List<RegisterInfo>> asyncCallback);
+	void deleteRegisters(Set<RegisterInfo> selectedForDeletion, String email, AsyncCallback<Void> asyncCallback);
 }
