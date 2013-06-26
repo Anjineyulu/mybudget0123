@@ -1,7 +1,6 @@
 package org.fortytwo.developers.mybudget0123.server;
 
 import org.fortytwo.developers.mybudget0123.client.LoginService;
-import org.fortytwo.developers.mybudget0123.shared.RegisterID;
 
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
@@ -13,8 +12,8 @@ public class LoginServiceImpl extends RemoteServiceServlet implements LoginServi
 	}
 
 	@Override
-	public RegisterID getRegisterID() {
-		return new RegisterID("test@gmail.com");
+	public String getRegisterID() {
+		return "test@gmail.com";
 	}
 
 }

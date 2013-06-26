@@ -1,5 +1,6 @@
 package org.fortytwo.developers.mybudget0123.client;
 
+import org.fortytwo.developers.mybudget0123.client.view.ListRegistersView;
 import org.fortytwo.developers.mybudget0123.client.view.RegisterView;
 
 import com.google.gwt.core.client.GWT;
@@ -15,6 +16,7 @@ public class ClientFactoryImpl implements ClientFactory {
 	
 	// views
 	private RegisterView registerView;
+	private ListRegistersView listRegistersView;
 
 	@Override
 	public PlaceController getPlaceController() {
@@ -42,6 +44,13 @@ public class ClientFactoryImpl implements ClientFactory {
 	@Override
 	public LoginServiceAsync getLoginService() {
 		return loginService;
+	}
+
+	@Override
+	public ListRegistersView getListRegistersView() {
+		if (null == listRegistersView)
+			listRegistersView = GWT.create(ListRegistersView.class);
+		return listRegistersView;
 	}
 
 }

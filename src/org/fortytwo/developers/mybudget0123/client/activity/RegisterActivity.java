@@ -13,6 +13,7 @@ import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.cellview.client.CellTable;
 import com.google.gwt.user.cellview.client.SimplePager;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.AcceptsOneWidget;
 import com.google.gwt.view.client.ListDataProvider;
@@ -69,7 +70,7 @@ public class RegisterActivity extends AbstractActivity implements RegisterView.P
 
 			@Override
 			public void onSuccess(Void result) {
-				
+				Window.alert("Done!");
 			}
 			
 		});

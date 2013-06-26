@@ -41,4 +41,7 @@
 	<replace-with class='org.fortytwo.developers.mybudget0123.client.view.RegisterViewDefault'>
 		<when-type-is class='org.fortytwo.developers.mybudget0123.client.view.RegisterView' />
 	</replace-with>
+	<replace-with class='org.fortytwo.developers.mybudget0123.client.view.ListRegistersViewDefault'>
+		<when-type-is class='org.fortytwo.developers.mybudget0123.client.view.ListRegistersView' />
+	</replace-with>
 </module>

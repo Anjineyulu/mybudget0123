@@ -3,6 +3,7 @@ package org.fortytwo.developers.mybudget0123.client.activity;
 import java.util.logging.Logger;
 
 import org.fortytwo.developers.mybudget0123.client.ClientFactory;
+import org.fortytwo.developers.mybudget0123.client.place.ListRegistersPlace;
 import org.fortytwo.developers.mybudget0123.client.place.LoginPlace;
 import org.fortytwo.developers.mybudget0123.client.place.RegisterPlace;
 import org.fortytwo.developers.mybudget0123.client.place.WelcomePlace;
@@ -21,8 +22,6 @@ public class WelcomeActivity extends AbstractActivity {
 	public WelcomeActivity(WelcomePlace place, ClientFactory clientFactory) {
 		//this.place = place;
 		this.clientFactory = clientFactory;
-
-		//view = clientFactory.getWelcomeView();
 	}
 
 	@Override
@@ -34,7 +33,7 @@ public class WelcomeActivity extends AbstractActivity {
 			public void onSuccess(Boolean arg0) {
 				logger.info(arg0.toString());
 				if (arg0) {
-					clientFactory.getLoginService().getRegisterID(new AsyncCallback<RegisterID>() {
+					clientFactory.getLoginService().getRegisterID(new AsyncCallback<String>() {
 
 						@Override
 						public void onFailure(Throwable arg0) {
@@ -42,10 +41,8 @@ public class WelcomeActivity extends AbstractActivity {
 						}
 
 						@Override
-						public void onSuccess(RegisterID arg0) {
-							logger.info(Boolean.toString(null == arg0));
-							logger.info(arg0.getID());
-							clientFactory.getPlaceController().goTo(new RegisterPlace(arg0));
+						public void onSuccess(String arg0) {
+							clientFactory.getPlaceController().goTo(new ListRegistersPlace(arg0));
 						}
 					});
 				} else {

@@ -14,7 +14,12 @@ import org.fortytwo.developers.mybudget0123.shared.CashFlow;
 import org.fortytwo.developers.mybudget0123.shared.CashFlow.Type;
 import org.fortytwo.developers.mybudget0123.shared.RegisterData;
 import org.fortytwo.developers.mybudget0123.shared.RegisterID;
+import org.fortytwo.developers.mybudget0123.shared.RegisterInfo;
 
+import com.google.appengine.api.datastore.DatastoreService;
+import com.google.appengine.api.datastore.DatastoreServiceFactory;
+import com.google.appengine.api.datastore.Query;
+import com.google.appengine.api.datastore.Query.*;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
 @SuppressWarnings("serial")
@@ -62,6 +67,23 @@ public class DataProviderImpl extends RemoteServiceServlet implements DataProvid
 		}
 		
 		return data;
+	}
+
+	@Override
+	public List<RegisterInfo> getRegisterList(String email) {
+		ArrayList<RegisterInfo> list = new ArrayList<RegisterInfo>();
+		
+		
+		try {
+			DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+			
+			Query query = new Query("RegisterInfo").setFilter(new FilterPredicate(""));
+		} finally {
+			
+		}
+				
+				
+		return list;
 	}
 	
 }

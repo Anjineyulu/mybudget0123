@@ -1,5 +1,6 @@
 package org.fortytwo.developers.mybudget0123.client;
 
+import org.fortytwo.developers.mybudget0123.client.view.ListRegistersView;
 import org.fortytwo.developers.mybudget0123.client.view.RegisterView;
 
 import com.google.gwt.place.shared.PlaceController;
@@ -14,5 +15,6 @@ public interface ClientFactory {
 	
 	//WelcomeView getWelcomeView();
 	RegisterView getRegisterView();
+	ListRegistersView getListRegistersView();
 	
 }

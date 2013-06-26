@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.fortytwo.developers.mybudget0123.shared.RegisterData;
 import org.fortytwo.developers.mybudget0123.shared.RegisterID;
+import org.fortytwo.developers.mybudget0123.shared.RegisterInfo;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
@@ -13,4 +14,6 @@ public interface DataProviderAsync {
 	void addRegisterData(RegisterData data, AsyncCallback<Void> callback);
 
 	void generateData(AsyncCallback<Void> callback);
+
+	void getRegisterList(String email, AsyncCallback<List<RegisterInfo>> asyncCallback);
 }

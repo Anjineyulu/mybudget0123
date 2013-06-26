@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.fortytwo.developers.mybudget0123.shared.RegisterData;
 import org.fortytwo.developers.mybudget0123.shared.RegisterID;
+import org.fortytwo.developers.mybudget0123.shared.RegisterInfo;
 
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
@@ -15,4 +16,6 @@ public interface DataProvider extends RemoteService {
 	void addRegisterData(RegisterData data);
 
 	void generateData();
+
+	List<RegisterInfo> getRegisterList(String email);
 }
