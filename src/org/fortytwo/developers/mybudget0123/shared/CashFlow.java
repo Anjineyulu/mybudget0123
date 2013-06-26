@@ -1,7 +1,10 @@
 package org.fortytwo.developers.mybudget0123.shared;
 
+import javax.jdo.annotations.PersistenceCapable;
+
 import com.google.gwt.user.client.rpc.IsSerializable;
 
+@PersistenceCapable
 public class CashFlow implements IsSerializable {
 	public enum Type {
 		GIVE,

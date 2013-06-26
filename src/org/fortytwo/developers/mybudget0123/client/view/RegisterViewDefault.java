@@ -10,8 +10,10 @@ import org.fortytwo.developers.mybudget0123.shared.RegisterData;
 import com.google.gwt.cell.client.DateCell;
 import com.google.gwt.cell.client.TextCell;
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
+import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.user.cellview.client.CellTable;
 import com.google.gwt.user.cellview.client.Column;
 import com.google.gwt.user.cellview.client.SimplePager;
@@ -26,6 +28,7 @@ public class RegisterViewDefault extends Composite implements RegisterView {
 	SimplePager registerTablePager;
 	
 	private ListDataProvider<RegisterData> registerDP;
+	private Presenter presenter;
 	
 	private static RegisterViewDefaultUiBinder uiBinder = GWT .create(RegisterViewDefaultUiBinder.class);
 
@@ -85,6 +88,17 @@ public class RegisterViewDefault extends Composite implements RegisterView {
 	@Override
 	public void setData(List<RegisterData> data) {
 		registerDP.setList(data);
+	}
+
+
+	@Override
+	public void setPresenter(Presenter presenter) {
+		this.presenter = presenter;
+	}
+	
+	@UiHandler("genBtn")
+	void onGenerateBtn(ClickEvent event) {
+		presenter.onGenerate();
 	}
 
 }

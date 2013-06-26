@@ -9,19 +9,15 @@ import org.fortytwo.developers.mybudget0123.client.view.RegisterView;
 import org.fortytwo.developers.mybudget0123.shared.RegisterData;
 
 import com.google.gwt.activity.shared.AbstractActivity;
-import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.uibinder.client.UiField;
-import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.user.cellview.client.CellTable;
 import com.google.gwt.user.cellview.client.SimplePager;
-import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.AcceptsOneWidget;
-import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.view.client.ListDataProvider;
 
-public class RegisterActivity extends AbstractActivity {
+public class RegisterActivity extends AbstractActivity implements RegisterView.Presenter {
 	private static final Logger logger = Logger.getLogger(RegisterActivity.class.toString());
 	
 	private RegisterPlace place;
@@ -44,6 +40,7 @@ public class RegisterActivity extends AbstractActivity {
 	@Override
 	public void start(AcceptsOneWidget widget, EventBus eventBus) {
 		logger.info("starting");
+		view.setPresenter(this);
 		
 		clientFactory.getDataProvider().getRegisterData(place.getRegisterID(), new AsyncCallback<List<RegisterData>>() {
 			
@@ -61,11 +58,9 @@ public class RegisterActivity extends AbstractActivity {
 		widget.setWidget(view);
 	}
 	
-	@UiHandler("generateBtn")
-	void onGenerateClick(ClickEvent event) {
-		logger.info("generateBtn clicked!");
+	@Override
+	public void onGenerate() {
 		clientFactory.getDataProvider().generateData(new AsyncCallback<Void>() {
-
 			@Override
 			public void onFailure(Throwable caught) {
 				// TODO Auto-generated method stub
@@ -74,9 +69,9 @@ public class RegisterActivity extends AbstractActivity {
 
 			@Override
 			public void onSuccess(Void result) {
-				Window.alert("Generated");
+				
 			}
+			
 		});
 	}
-
 }

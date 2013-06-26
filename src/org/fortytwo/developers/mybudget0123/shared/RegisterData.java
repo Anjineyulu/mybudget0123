@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.jdo.annotations.Embedded;
 import javax.jdo.annotations.IdGeneratorStrategy;
 import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
@@ -17,6 +18,7 @@ public class RegisterData implements Serializable {
 	@Persistent(valueStrategy = IdGeneratorStrategy.IDENTITY)
 	private Long key;
 	@Persistent
+	@Embedded
 	private CashFlow cashFlow;
 	@Persistent
 	private Date date;
@@ -25,6 +27,7 @@ public class RegisterData implements Serializable {
 	@Persistent
 	private String comment;
 	@Persistent
+	@Embedded
 	private RegisterID registerID;
 	
 	public RegisterData(){}

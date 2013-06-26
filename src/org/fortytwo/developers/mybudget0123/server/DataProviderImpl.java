@@ -30,6 +30,9 @@ public class DataProviderImpl extends RemoteServiceServlet implements DataProvid
 			pm.currentTransaction().begin();
 			pm.makePersistent(data);
 			pm.currentTransaction().commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+			pm.currentTransaction().rollback();
 		} finally {
 			pm.close();
 		}
@@ -39,7 +42,7 @@ public class DataProviderImpl extends RemoteServiceServlet implements DataProvid
 	public void generateData() {
 		logger.info("generating 100 fake data");
 		Random rand = new Random();
-		for (int i = 0; i < 100; ++i) {
+		for (int i = 0; i < 1; ++i) {
 			CashFlow cf = new CashFlow(rand.nextBoolean() ? Type.TAKE : Type.GIVE, 100 * rand.nextDouble());
 			addRegisterData(new RegisterData(new RegisterID("test123"), cf, new Date(), null, "test data"));
 		}

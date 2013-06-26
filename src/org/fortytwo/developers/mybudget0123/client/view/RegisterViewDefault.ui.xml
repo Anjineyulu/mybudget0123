@@ -4,7 +4,7 @@
 	xmlns:c="urn:import:com.google.gwt.user.cellview.client">
 	
 	<g:HTMLPanel>
-	<g:Button ui:field="generateBtn">Generate</g:Button>
+	<g:Button ui:field="genBtn">Generate</g:Button>
 	<center>
 		<c:CellTable ui:field="registerTable" />
 		<c:SimplePager ui:field="registerTablePager" />
