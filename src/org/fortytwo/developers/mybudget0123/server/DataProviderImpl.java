@@ -7,19 +7,17 @@ import java.util.Random;
 import java.util.logging.Logger;
 
 import javax.jdo.PersistenceManager;
+import javax.jdo.Query;
 
 import org.fortytwo.developers.mybudget0123.client.DataProvider;
 import org.fortytwo.developers.mybudget0123.server.data.PMF;
 import org.fortytwo.developers.mybudget0123.shared.CashFlow;
 import org.fortytwo.developers.mybudget0123.shared.CashFlow.Type;
-import org.fortytwo.developers.mybudget0123.shared.RegisterData;
-import org.fortytwo.developers.mybudget0123.shared.RegisterID;
 import org.fortytwo.developers.mybudget0123.shared.RegisterInfo;
 
-import com.google.appengine.api.datastore.DatastoreService;
-import com.google.appengine.api.datastore.DatastoreServiceFactory;
-import com.google.appengine.api.datastore.Query;
-import com.google.appengine.api.datastore.Query.*;
+import com.google.appengine.api.datastore.Query.Filter;
+import com.google.appengine.api.datastore.Query.FilterOperator;
+import com.google.appengine.api.datastore.Query.FilterPredicate;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
 @SuppressWarnings("serial")
@@ -28,7 +26,7 @@ public class DataProviderImpl extends RemoteServiceServlet implements DataProvid
 	
 	
 	@Override
-	public void addRegisterData(RegisterData data) {
+	public void addRegisterData(Double amount, boolean isGive, Date date, RegisterInfo register) {
 		logger.info("Storing " + data.toString());
 		PersistenceManager pm = PMF.get().getPersistenceManager();
 		try {
@@ -75,9 +73,18 @@ public class DataProviderImpl extends RemoteServiceServlet implements DataProvid
 		
 		
 		try {
-			DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+			PersistenceManager pm = PMF.get().getPersistenceManager();
 			
-			Query query = new Query("RegisterInfo").setFilter(new FilterPredicate(""));
+			ArrayList<Filter> filters = new ArrayList<Filter>();
+			filters.add(new FilterPredicate("owner", FilterOperator.EQUAL, email));
+			filters.add(new FilterPredicate("authorized", FilterOperator.IN, email));
+			Query query = pm.newQuery("RegisterInfo");
+			query.setFilter("owner == " + email);
+			
+			
+			/*for (RegisterData data : (List<RegisterData>) query.execute()) {
+				
+			}*/
 		} finally {
 			
 		}

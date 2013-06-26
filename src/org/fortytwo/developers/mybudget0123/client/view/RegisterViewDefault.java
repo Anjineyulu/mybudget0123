@@ -86,7 +86,7 @@ public class RegisterViewDefault extends Composite implements RegisterView {
 
 
 	@Override
-	public void setData(List<RegisterData> data) {
+	public void setData(List<CashFlow> data) {
 		registerDP.setList(data);
 	}
 

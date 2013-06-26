@@ -27,4 +27,12 @@ public class RegisterInfo implements Serializable {
 	public RegisterInfo(String email) {
 		this.email = email;
 	}
+	
+	public String getEmail() {
+		return email;
+	}
+	
+	public Long getKey() {
+		return key;
+	}
 }
