@@ -85,13 +85,17 @@ public class DataProviderImpl extends RemoteServiceServlet implements DataProvid
 			query.declareParameters("String givenEmail");
 			
 			try {
-				List<RegisterInfo> list =  (List<RegisterInfo>) query.execute(email);
+				List<RegisterInfo> list =  new ArrayList<RegisterInfo>();
+				List<RegisterInfo> pList = (List<RegisterInfo>) query.execute(email);
 			
-				if (null == list)
+				if (null == pList)
 					logger.info("Retrieved null");
-				else
+				else {
 					logger.info(list.toString());
-				return new ArrayList<RegisterInfo>(list);
+					for (RegisterInfo rInfo : pList)
+						list.add(new RegisterInfo(rInfo));
+				}
+				return list;
 			} finally {
 				query.closeAll();
 			}
