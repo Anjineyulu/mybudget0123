@@ -44,6 +44,7 @@ public class CashFlow implements IsSerializable {
 		this.amount = amount;
 		this.date = date;
 		this.registerID = registerID;
+		this.author = author;
 		this.comment = comment;
 	}
 

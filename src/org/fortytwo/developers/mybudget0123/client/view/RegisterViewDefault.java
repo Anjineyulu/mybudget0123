@@ -17,7 +17,13 @@ import com.google.gwt.user.cellview.client.Column;
 import com.google.gwt.user.cellview.client.SimplePager;
 import com.google.gwt.user.cellview.client.TextColumn;
 import com.google.gwt.user.client.ui.Composite;
+import com.google.gwt.user.client.ui.DialogBox;
+import com.google.gwt.user.client.ui.DoubleBox;
+import com.google.gwt.user.client.ui.HasValue;
+import com.google.gwt.user.client.ui.ListBox;
+import com.google.gwt.user.client.ui.TextArea;
 import com.google.gwt.user.client.ui.Widget;
+import com.google.gwt.user.datepicker.client.DatePicker;
 import com.google.gwt.view.client.ListDataProvider;
 
 public class RegisterViewDefault extends Composite implements RegisterView {
@@ -25,6 +31,18 @@ public class RegisterViewDefault extends Composite implements RegisterView {
 	CellTable<CashFlow> registerTable;
 	@UiField(provided = true)
 	SimplePager registerTablePager;
+	
+	@UiField
+	DialogBox addBox;
+	
+	@UiField
+	DoubleBox amountTB;
+	@UiField
+	DatePicker datePicker;
+	@UiField
+    TextArea commentTB;
+	@UiField
+	ListBox type;
 	
 	private ListDataProvider<CashFlow> registerDP;
 	private Presenter presenter;
@@ -99,9 +117,47 @@ public class RegisterViewDefault extends Composite implements RegisterView {
 		this.presenter = presenter;
 	}
 	
+	@Override
+	public void showAddFrame(boolean show) {
+		if (show)
+			addBox.center();
+		else
+			addBox.hide();
+	}
+	
 	@UiHandler("genBtn")
 	void onGenerateBtn(ClickEvent event) {
 		presenter.onGenerate();
+	}
+	
+	@UiHandler("addBtn")
+	void onAddClicked(ClickEvent event) {
+		presenter.onAddClicked();
+	}
+	
+	@UiHandler("cancelBtn")
+	void onAddCancel(ClickEvent event) {
+		presenter.onAddCancelled();
+	}
+	
+	@UiHandler("createBtn")
+	void onAddConfirmed(ClickEvent event) {
+		presenter.onAddConfirmed();
+	}
+
+	@Override
+	public HasValue<Double> getAmount() {
+		return amountTB;
+	}
+	
+	@Override
+	public HasValue<Date> getDate() {
+		return datePicker;
+	}
+	
+	@Override
+	public String getType() {
+		return type.getValue(type.getSelectedIndex());
 	}
 
 }

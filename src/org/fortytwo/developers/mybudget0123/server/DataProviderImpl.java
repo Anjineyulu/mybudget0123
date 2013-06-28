@@ -27,28 +27,6 @@ public class DataProviderImpl extends RemoteServiceServlet implements DataProvid
 	private static final Logger logger = Logger.getLogger(DataProviderImpl.class.toString());
 	
 	@Override
-	public void addRegisterData(Double amount, CashFlow.Type type, Date date, RegisterInfo register) throws UserUnauthenticatedException {
-		UserService us = UserServiceFactory.getUserService();
-		if (!us.isUserLoggedIn()) throw new UserUnauthenticatedException();
-		
-		User u = us.getCurrentUser();
-		
-		PersistenceManager pm = PMF.get().getPersistenceManager();
-		
-		try {
-			
-			pm.currentTransaction().begin();
-			pm.makePersistent(new CashFlow(type, amount, date, register.getKey(), u.getEmail(), ""));
-			pm.currentTransaction().commit();
-		} catch (Exception e) {
-			e.printStackTrace();
-			pm.currentTransaction().rollback();
-		} finally {
-			pm.close();
-		}
-	}
-	
-	@Override
 	public List<CashFlow> getRegisterData(Long registerID) {
 		ArrayList<CashFlow> data = new ArrayList<CashFlow>();
 		
@@ -148,6 +126,27 @@ public class DataProviderImpl extends RemoteServiceServlet implements DataProvid
 		} finally {
 			if (pm.currentTransaction().isActive())
 				pm.currentTransaction().commit();
+			pm.close();
+		}
+	}
+
+	@Override
+	public void addRegisterData(Double amount, Type type, Date date, Long register) throws UserUnauthenticatedException {
+		UserService us = UserServiceFactory.getUserService();
+		if (!us.isUserLoggedIn()) throw new UserUnauthenticatedException();
+			
+		User u = us.getCurrentUser();
+			
+		PersistenceManager pm = PMF.get().getPersistenceManager();
+			
+		try {
+			pm.currentTransaction().begin();
+			pm.makePersistent(new CashFlow(type, amount, date, register, u.getEmail(), ""));
+			pm.currentTransaction().commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+			pm.currentTransaction().rollback();
+		} finally {
 			pm.close();
 		}
 	}

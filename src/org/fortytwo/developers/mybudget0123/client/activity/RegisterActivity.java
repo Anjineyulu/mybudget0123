@@ -1,5 +1,6 @@
 package org.fortytwo.developers.mybudget0123.client.activity;
 
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -59,7 +60,36 @@ public class RegisterActivity extends AbstractActivity implements RegisterView.P
 	}
 	
 	@Override
+	public void onAddClicked() {
+		view.getAmount().setValue(0.0);
+		view.getDate().setValue(new Date());
+		view.showAddFrame(true);
+	}
+	
+	@Override
 	public void onGenerate() {
 		
+	}
+
+	@Override
+	public void onAddCancelled() {
+		view.showAddFrame(false);
+	}
+
+	@Override
+	public void onAddConfirmed() {
+		clientFactory.getDataProvider().addRegisterData(view.getAmount().getValue(), CashFlow.Type.valueOf(view.getType()), view.getDate().getValue(), place.getRegisterID(), new AsyncCallback<Void>() {
+
+			@Override
+			public void onFailure(Throwable caught) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void onSuccess(Void result) {
+				view.showAddFrame(false);
+			}
+		});
 	}
 }
