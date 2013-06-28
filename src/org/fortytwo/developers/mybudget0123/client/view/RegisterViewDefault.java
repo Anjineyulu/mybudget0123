@@ -15,6 +15,7 @@ import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.user.cellview.client.CellTable;
 import com.google.gwt.user.cellview.client.Column;
 import com.google.gwt.user.cellview.client.SimplePager;
+import com.google.gwt.user.cellview.client.TextColumn;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.gwt.view.client.ListDataProvider;
@@ -52,27 +53,30 @@ public class RegisterViewDefault extends Composite implements RegisterView {
 				return data;
 			}
 		};
-		/*Column<CashFlow, String> authorColumn = new Column<CashFlow, String>(new TextCell()) {
+		TextColumn<CashFlow> authorColumn = new TextColumn<CashFlow>(){
 
 			@Override
-			public String getValue(CashFlow data) {
-				if (null == data) return null;
-				return data..toString();
+			public String getValue(CashFlow object) {
+				if (null != object)
+					object.getAuthor();
+				return null;
 			}
+			
+		}; 
+		TextColumn<CashFlow> commentColumn = new TextColumn<CashFlow>() {
+
+			@Override
+			public String getValue(CashFlow object) {
+				if (null != object) return object.getComment();
+				return null;
+			}
+			
 		};
-		Column<RegisterData, String> commentColumn = new Column<RegisterData, String>(new TextCell()) {
-
-			@Override
-			public String getValue(RegisterData data) {
-				if (null == data) return null;
-				return data.getComment();
-			}
-		};*/
 		
 		registerTable.addColumn(dateColumn, "Date");
 		registerTable.addColumn(flowColumn, "Amount");
-//		registerTable.addColumn(authorColumn, "Author");
-//		registerTable.addColumn(commentColumn, "Comment");
+		registerTable.addColumn(authorColumn, "Author");
+		registerTable.addColumn(commentColumn, "Comment");
 		registerTablePager = new SimplePager();
 		
 		initWidget(uiBinder.createAndBindUi(this));
@@ -82,6 +86,7 @@ public class RegisterViewDefault extends Composite implements RegisterView {
 		registerTablePager.setDisplay(registerTable);
 	}
 
+	
 
 	@Override
 	public void setData(List<CashFlow> data) {

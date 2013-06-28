@@ -11,7 +11,6 @@ import com.google.gwt.user.client.rpc.IsSerializable;
 
 @PersistenceCapable
 public class CashFlow implements IsSerializable {
-	@PersistenceCapable
 	public enum Type {
 		GIVE,
 		TAKE
@@ -26,20 +25,26 @@ public class CashFlow implements IsSerializable {
 	
 	@Persistent
 	private Double amount;
+	@Persistent
+	private String author;
 	
 	@Persistent(mappedBy = "RegisterInfo")
 	private Long registerID;
 	
 	@Persistent
 	private Date date;
+
+	@Persistent
+	private String comment;
 	
 	CashFlow(){}
 	
-	public CashFlow(Type type, Double amount, Date date, Long registerID) {
+	public CashFlow(Type type, Double amount, Date date, Long registerID, String author, String comment) {
 		this.type = type;
 		this.amount = amount;
 		this.date = date;
 		this.registerID = registerID;
+		this.comment = comment;
 	}
 
 	public Type getType() {
@@ -60,5 +65,13 @@ public class CashFlow implements IsSerializable {
 	
 	public Long getKey() {
 		return key;
+	}
+
+	public String getAuthor() {
+		return author;
+	}
+
+	public String getComment() {
+		return comment;
 	}
 }

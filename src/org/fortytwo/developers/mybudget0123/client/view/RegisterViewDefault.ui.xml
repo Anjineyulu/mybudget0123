@@ -5,6 +5,7 @@
 	
 	<g:HTMLPanel>
 	<g:Button ui:field="genBtn">Generate</g:Button>
+	<g:Button ui:field="addBtn">Add</g:Button>
 	<center>
 		<c:CellTable ui:field="registerTable" />
 		<c:SimplePager ui:field="registerTablePager" />

@@ -14,8 +14,12 @@ import org.fortytwo.developers.mybudget0123.client.DataProvider;
 import org.fortytwo.developers.mybudget0123.server.data.PMF;
 import org.fortytwo.developers.mybudget0123.shared.CashFlow;
 import org.fortytwo.developers.mybudget0123.shared.CashFlow.Type;
+import org.fortytwo.developers.mybudget0123.shared.exception.UserUnauthenticatedException;
 import org.fortytwo.developers.mybudget0123.shared.RegisterInfo;
 
+import com.google.appengine.api.users.User;
+import com.google.appengine.api.users.UserService;
+import com.google.appengine.api.users.UserServiceFactory;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
 @SuppressWarnings("serial")
@@ -23,11 +27,18 @@ public class DataProviderImpl extends RemoteServiceServlet implements DataProvid
 	private static final Logger logger = Logger.getLogger(DataProviderImpl.class.toString());
 	
 	@Override
-	public void addRegisterData(Double amount, CashFlow.Type type, Date date, RegisterInfo register) {
+	public void addRegisterData(Double amount, CashFlow.Type type, Date date, RegisterInfo register) throws UserUnauthenticatedException {
+		UserService us = UserServiceFactory.getUserService();
+		if (!us.isUserLoggedIn()) throw new UserUnauthenticatedException();
+		
+		User u = us.getCurrentUser();
+		
 		PersistenceManager pm = PMF.get().getPersistenceManager();
+		
 		try {
+			
 			pm.currentTransaction().begin();
-			pm.makePersistent(new CashFlow(type, amount, date, register.getKey()));
+			pm.makePersistent(new CashFlow(type, amount, date, register.getKey(), u.getEmail(), ""));
 			pm.currentTransaction().commit();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -44,7 +55,7 @@ public class DataProviderImpl extends RemoteServiceServlet implements DataProvid
 		Random rand = new Random();
 		
 		for (int i = 0; i < 100; ++i) {
-			data.add(new CashFlow(rand.nextBoolean() ? Type.TAKE : Type.GIVE, 100 * rand.nextDouble(), new Date(), registerID));
+			data.add(new CashFlow(rand.nextBoolean() ? Type.TAKE : Type.GIVE, 100 * rand.nextDouble(), new Date(), registerID, "test.email@gmail.com", ""));
 		}
 		
 		return data;
