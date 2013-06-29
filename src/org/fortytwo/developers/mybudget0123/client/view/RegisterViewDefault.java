@@ -34,19 +34,6 @@ public class RegisterViewDefault extends Composite implements RegisterView {
 	SimplePager registerTablePager;
 	
 	@UiField
-	DialogBox addBox;
-	
-	@UiField
-	DoubleBox amountTB;
-	@UiField
-	DatePicker datePicker;
-	@UiField
-    TextArea commentTB;
-	@UiField
-	ListBox type;
-	@UiField
-	Button cancelBtn;
-	@UiField
 	Button addBtn;
 	
 	private ListDataProvider<CashFlow> registerDP;
@@ -122,14 +109,6 @@ public class RegisterViewDefault extends Composite implements RegisterView {
 		this.presenter = presenter;
 	}
 	
-	@Override
-	public void showAddFrame(boolean show) {
-		if (show)
-			addBox.center();
-		else
-			addBox.hide();
-	}
-	
 	@UiHandler("genBtn")
 	void onGenerateBtn(ClickEvent event) {
 		presenter.onGenerate();
@@ -139,38 +118,4 @@ public class RegisterViewDefault extends Composite implements RegisterView {
 	void onAddClicked(ClickEvent event) {
 		presenter.onAddClicked();
 	}
-	
-	@UiHandler("cancelBtn")
-	void onAddCancel(ClickEvent event) {
-		presenter.onAddCancelled();
-	}
-	
-	@UiHandler("createBtn")
-	void onAddConfirmed(ClickEvent event) {
-		presenter.onAddConfirmed();
-	}
-
-	@Override
-	public HasValue<Double> getAmount() {
-		return amountTB;
-	}
-	
-	@Override
-	public HasValue<Date> getDate() {
-		return datePicker;
-	}
-	
-	@Override
-	public String getType() {
-		return type.getValue(type.getSelectedIndex());
-	}
-
-
-
-	@Override
-	public void enableFrame(boolean enabled) {
-		addBtn.setEnabled(enabled);
-		cancelBtn.setEnabled(enabled);
-	}
-
 }

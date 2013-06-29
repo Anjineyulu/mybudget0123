@@ -1,6 +1,5 @@
 package org.fortytwo.developers.mybudget0123.client.activity;
 
-import java.util.Date;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -44,7 +43,7 @@ public class RegisterActivity extends AbstractActivity implements RegisterView.P
 		logger.info("starting");
 		view.setPresenter(this);
 
-		getData(false);
+		getData();
 
 		widget.setWidget(view);
 	}
@@ -52,10 +51,6 @@ public class RegisterActivity extends AbstractActivity implements RegisterView.P
 	@Override
 	public void onAddClicked() {
 		logger.info("onAddClicked");
-		view.getAmount().setValue(0.0);
-		view.getDate().setValue(new Date());
-		view.enableFrame(true);
-		view.showAddFrame(true);
 	}
 
 	@Override
@@ -75,46 +70,17 @@ public class RegisterActivity extends AbstractActivity implements RegisterView.P
 		});
 	}
 
-	@Override
-	public void onAddCancelled() {
-		logger.info("add cancelled");
-		view.showAddFrame(false);
-	}
-
-	private void getData(final boolean fromAdd) {
+	private void getData() {
 		clientFactory.getDataProvider().getRegisterData(place.getRegisterID(), new AsyncCallback<List<CashFlow>>() {
 
 			@Override
 			public void onSuccess(List<CashFlow> data) {
 				view.setData(data);
-				if (fromAdd)
-					view.showAddFrame(false);
 			}
 
 			@Override
 			public void onFailure(Throwable arg0) {
 				logger.severe(arg0.getMessage());
-				if (fromAdd)
-					view.enableFrame(true);
-			}
-		});
-	}
-
-	@Override
-	public void onAddConfirmed() {
-		logger.info("confirmed on add");
-		view.enableFrame(false);
-		clientFactory.getDataProvider().addCashFlow(view.getAmount().getValue(), CashFlow.Type.valueOf(view.getType().toUpperCase()), view.getDate().getValue(), place.getRegisterID(), new AsyncCallback<Void>() {
-
-			@Override
-			public void onFailure(Throwable caught) {
-				// TODO Auto-generated method stub
-				logger.info("addCashFlow failed");
-			}
-
-			@Override
-			public void onSuccess(Void result) {
-				getData(true);
 			}
 		});
 	}

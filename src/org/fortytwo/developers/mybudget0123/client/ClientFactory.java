@@ -1,5 +1,6 @@
 package org.fortytwo.developers.mybudget0123.client;
 
+import org.fortytwo.developers.mybudget0123.client.view.AddCashFlowView;
 import org.fortytwo.developers.mybudget0123.client.view.ListRegistersView;
 import org.fortytwo.developers.mybudget0123.client.view.RegisterView;
 
@@ -16,5 +17,6 @@ public interface ClientFactory {
 	//WelcomeView getWelcomeView();
 	RegisterView getRegisterView();
 	ListRegistersView getListRegistersView();
+	AddCashFlowView getAddCashFlowPlace();
 	
 }
