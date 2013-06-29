@@ -15,8 +15,9 @@ import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 @RemoteServiceRelativePath("data")
 public interface DataProvider extends RemoteService {
 	List<RegisterInfo> getRegisterList(String email);
-	void addRegisterData(Double amount, Type type, Date date, Long register) throws UserUnauthenticatedException;
+	void addCashFlow(Double amount, Type type, Date date, Long register) throws UserUnauthenticatedException;
 	List<CashFlow> getRegisterData(Long registerID);
 	Long createRegister(String email, String name);
 	void deleteRegisters(Set<RegisterInfo> selectedForDeletion, String email);
+	void generate(Long registerID);
 }

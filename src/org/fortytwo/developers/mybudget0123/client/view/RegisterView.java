@@ -22,4 +22,5 @@ public interface RegisterView extends IsWidget {
 	HasValue<Double> getAmount();
 	HasValue<Date> getDate();
 	String getType();
+	void enableFrame(boolean lock);
 }

@@ -16,6 +16,7 @@ import com.google.gwt.user.cellview.client.CellTable;
 import com.google.gwt.user.cellview.client.Column;
 import com.google.gwt.user.cellview.client.SimplePager;
 import com.google.gwt.user.cellview.client.TextColumn;
+import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.DialogBox;
 import com.google.gwt.user.client.ui.DoubleBox;
@@ -43,6 +44,10 @@ public class RegisterViewDefault extends Composite implements RegisterView {
     TextArea commentTB;
 	@UiField
 	ListBox type;
+	@UiField
+	Button cancelBtn;
+	@UiField
+	Button addBtn;
 	
 	private ListDataProvider<CashFlow> registerDP;
 	private Presenter presenter;
@@ -158,6 +163,14 @@ public class RegisterViewDefault extends Composite implements RegisterView {
 	@Override
 	public String getType() {
 		return type.getValue(type.getSelectedIndex());
+	}
+
+
+
+	@Override
+	public void enableFrame(boolean enabled) {
+		addBtn.setEnabled(enabled);
+		cancelBtn.setEnabled(enabled);
 	}
 
 }

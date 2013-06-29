@@ -14,8 +14,8 @@ import org.fortytwo.developers.mybudget0123.client.DataProvider;
 import org.fortytwo.developers.mybudget0123.server.data.PMF;
 import org.fortytwo.developers.mybudget0123.shared.CashFlow;
 import org.fortytwo.developers.mybudget0123.shared.CashFlow.Type;
-import org.fortytwo.developers.mybudget0123.shared.exception.UserUnauthenticatedException;
 import org.fortytwo.developers.mybudget0123.shared.RegisterInfo;
+import org.fortytwo.developers.mybudget0123.shared.exception.UserUnauthenticatedException;
 
 import com.google.appengine.api.users.User;
 import com.google.appengine.api.users.UserService;
@@ -26,14 +26,31 @@ import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 public class DataProviderImpl extends RemoteServiceServlet implements DataProvider {
 	private static final Logger logger = Logger.getLogger(DataProviderImpl.class.toString());
 	
+	private static final boolean D = true; // DEBUG!!
+	
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<CashFlow> getRegisterData(Long registerID) {
+		logger.info("Retrieving cashflows for " + registerID);
+		
 		ArrayList<CashFlow> data = new ArrayList<CashFlow>();
+		PersistenceManager pm = null;
 		
-		Random rand = new Random();
-		
-		for (int i = 0; i < 100; ++i) {
-			data.add(new CashFlow(rand.nextBoolean() ? Type.TAKE : Type.GIVE, 100 * rand.nextDouble(), new Date(), registerID, "test.email@gmail.com", ""));
+		try {
+			pm = PMF.get().getPersistenceManager();
+			//pm.currentTransaction().setIsolationLe
+			Query q = pm.newQuery(CashFlow.class);
+			q.setFilter("registerID == givenID");
+			q.declareParameters("Long givenID");
+			try {
+				for (CashFlow cf : (List<CashFlow>)q.execute(registerID)) {
+					data.add(new CashFlow(cf));
+				}
+			} finally {
+				q.closeAll();
+			}
+		} finally {
+			pm.close();
 		}
 		
 		return data;
@@ -129,24 +146,42 @@ public class DataProviderImpl extends RemoteServiceServlet implements DataProvid
 			pm.close();
 		}
 	}
+	
+	@Override
+	public void generate(Long registerID) {
+		Random rand = new Random();
+		for (int i = 0; i < 100; ++i) {
+			try {
+				addCashFlow( 100 * rand.nextDouble(), rand.nextBoolean() ? Type.TAKE : Type.GIVE, new Date(), registerID);
+			} catch (UserUnauthenticatedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}
 
 	@Override
-	public void addRegisterData(Double amount, Type type, Date date, Long register) throws UserUnauthenticatedException {
+	public void addCashFlow(Double amount, Type type, Date date, Long register) throws UserUnauthenticatedException {
 		UserService us = UserServiceFactory.getUserService();
-		if (!us.isUserLoggedIn()) throw new UserUnauthenticatedException();
-			
+		if (!us.isUserLoggedIn()) {
+			logger.info("unauthenticated");
+			if (!D)
+				throw new UserUnauthenticatedException();
+		}
+		
 		User u = us.getCurrentUser();
 			
 		PersistenceManager pm = PMF.get().getPersistenceManager();
 			
 		try {
 			pm.currentTransaction().begin();
-			pm.makePersistent(new CashFlow(type, amount, date, register, u.getEmail(), ""));
-			pm.currentTransaction().commit();
+			pm.makePersistent(new CashFlow(type, amount, date, register, D ? "test@gmail.com" : u.getEmail(), ""));
 		} catch (Exception e) {
 			e.printStackTrace();
 			pm.currentTransaction().rollback();
 		} finally {
+			if (pm.currentTransaction().isActive())
+				pm.currentTransaction().commit();
 			pm.close();
 		}
 	}
