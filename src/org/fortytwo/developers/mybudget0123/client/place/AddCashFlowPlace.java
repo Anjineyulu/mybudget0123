@@ -20,7 +20,13 @@ public class AddCashFlowPlace extends Place {
 	
 	private Long registerID;
 	
+	AddCashFlowPlace() {}
+	
 	public AddCashFlowPlace(Long registerID) {
 		this.registerID = registerID;
+	}
+
+	public Long getRegisterID() {
+		return registerID;
 	}
 }

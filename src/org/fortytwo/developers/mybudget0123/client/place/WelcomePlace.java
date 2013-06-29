@@ -10,7 +10,7 @@ public class WelcomePlace extends Place {
 	private static final Logger logger = Logger.getLogger(WelcomePlace.class.toString());
 	@Prefix("welcome")
 	public class Tokenizer implements PlaceTokenizer<WelcomePlace> {
-
+		
 		@Override
 		public WelcomePlace getPlace(String token) {
 			logger.info("getting logger for token" + token);

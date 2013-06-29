@@ -4,6 +4,7 @@ import java.util.Date;
 
 import org.fortytwo.developers.mybudget0123.client.ClientFactory;
 import org.fortytwo.developers.mybudget0123.client.place.AddCashFlowPlace;
+import org.fortytwo.developers.mybudget0123.client.place.RegisterPlace;
 import org.fortytwo.developers.mybudget0123.client.view.AddCashFlowView;
 
 import com.google.gwt.activity.shared.AbstractActivity;
@@ -14,9 +15,11 @@ public class AddCashFlowActivity extends AbstractActivity implements AddCashFlow
 
 	private AddCashFlowPlace place;
 	private AddCashFlowView view;
+	private ClientFactory clientFactory;
 
 	public AddCashFlowActivity(AddCashFlowPlace place, ClientFactory clientFactory) {
 		this.place = place;
+		this.clientFactory = clientFactory;
 		view = clientFactory.getAddCashFlowPlace();
 	}
 	
@@ -31,13 +34,13 @@ public class AddCashFlowActivity extends AbstractActivity implements AddCashFlow
 
 	@Override
 	public void onAddCancelled() {
-		
+		clientFactory.getPlaceController().goTo(new RegisterPlace(place.getRegisterID()));
 	}
 
 	@Override
 	public void onAddConfirmed() {
-		// TODO Auto-generated method stub
-
+		view.enableFrame(false);
+		clientFactory.
 	}
 
 }

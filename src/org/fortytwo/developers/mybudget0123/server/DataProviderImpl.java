@@ -98,8 +98,10 @@ public class DataProviderImpl extends RemoteServiceServlet implements DataProvid
 					logger.info("Retrieved null");
 				else {
 					logger.info(list.toString());
+					//list.addAll(pList);
 					for (RegisterInfo rInfo : pList)
 						list.add(new RegisterInfo(rInfo));
+					
 				}
 				return list;
 			} finally {

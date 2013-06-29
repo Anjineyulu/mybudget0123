@@ -1,5 +1,6 @@
 package org.fortytwo.developers.mybudget0123.client;
 
+import org.fortytwo.developers.mybudget0123.client.view.AddCashFlowView;
 import org.fortytwo.developers.mybudget0123.client.view.ListRegistersView;
 import org.fortytwo.developers.mybudget0123.client.view.RegisterView;
 
@@ -17,6 +18,7 @@ public class ClientFactoryImpl implements ClientFactory {
 	// views
 	private RegisterView registerView;
 	private ListRegistersView listRegistersView;
+	private AddCashFlowView addCashFlowView;
 
 	@Override
 	public PlaceController getPlaceController() {
@@ -51,6 +53,13 @@ public class ClientFactoryImpl implements ClientFactory {
 		if (null == listRegistersView)
 			listRegistersView = GWT.create(ListRegistersView.class);
 		return listRegistersView;
+	}
+
+	@Override
+	public AddCashFlowView getAddCashFlowPlace() {
+		if (null == addCashFlowView)
+			addCashFlowView = GWT.create(AddCashFlowView.class);
+		return null;
 	}
 
 }

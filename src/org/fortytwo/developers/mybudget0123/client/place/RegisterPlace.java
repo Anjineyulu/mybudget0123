@@ -20,7 +20,9 @@ public class RegisterPlace extends Place {
 	}
 	
 	private Long id;
-
+	
+	private RegisterPlace() {}
+	
 	public RegisterPlace(Long registerID) {
 		this.id = registerID;
 	}
