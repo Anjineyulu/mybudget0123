@@ -85,4 +85,16 @@ public class AddCashFlowViewDefault extends Composite implements AddCashFlowView
 		commentTB.setEnabled(enabled);
 	}
 
+	@Override
+	public HasValue<String> getMessage() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void enableMessage(boolean enable) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

@@ -10,6 +10,7 @@ import org.fortytwo.developers.mybudget0123.shared.CashFlow;
 
 import com.google.gwt.activity.shared.AbstractActivity;
 import com.google.gwt.event.shared.EventBus;
+import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.AcceptsOneWidget;
 
@@ -18,20 +19,36 @@ public class AddCashFlowActivity extends AbstractActivity implements AddCashFlow
 	private AddCashFlowPlace place;
 	private AddCashFlowView view;
 	private ClientFactory clientFactory;
+	private Timer messageTimer;
 
 	public AddCashFlowActivity(AddCashFlowPlace place, ClientFactory clientFactory) {
 		this.place = place;
 		this.clientFactory = clientFactory;
 		view = clientFactory.getAddCashFlowView();
+		messageTimer = new Timer() {
+			@Override
+			public void run() {
+				view.enableMessage(false);
+			}
+		}; 
 	}
 	
 	@Override
 	public void start(AcceptsOneWidget panel, EventBus eventBus) {
+		init();
+		panel.setWidget(view);
+	}
+	
+	@Override
+	public void onStop() {
+		messageTimer.cancel();
+	}
+	
+	private void init() {
 		view.setPresenter(this);
 		view.getAmount().setValue(0.0);
 		view.getDate().setValue(new Date());
 		view.enableFrame(true);
-		panel.setWidget(view);
 	}
 
 	@Override
@@ -52,7 +69,11 @@ public class AddCashFlowActivity extends AbstractActivity implements AddCashFlow
 
 			@Override
 			public void onSuccess(Void result) {
-				clientFactory.getPlaceController().goTo(new RegisterPlace(place.getRegisterID()));
+				//clientFactory.getPlaceController().goTo(new RegisterPlace(place.getRegisterID()));
+				messageTimer.cancel();
+				view.getMessage().setValue("Cash flow added");
+				messageTimer.schedule(5000);
+				init();
 			}
 		});
 	}
