@@ -56,7 +56,7 @@ public class ClientFactoryImpl implements ClientFactory {
 	}
 
 	@Override
-	public AddCashFlowView getAddCashFlowPlace() {
+	public AddCashFlowView getAddCashFlowView() {
 		if (null == addCashFlowView)
 			addCashFlowView = GWT.create(AddCashFlowView.class);
 		return null;

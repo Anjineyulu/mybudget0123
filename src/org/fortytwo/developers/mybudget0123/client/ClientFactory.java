@@ -17,6 +17,6 @@ public interface ClientFactory {
 	//WelcomeView getWelcomeView();
 	RegisterView getRegisterView();
 	ListRegistersView getListRegistersView();
-	AddCashFlowView getAddCashFlowPlace();
+	AddCashFlowView getAddCashFlowView();
 	
 }
