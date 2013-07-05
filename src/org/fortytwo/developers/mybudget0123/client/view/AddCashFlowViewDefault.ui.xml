@@ -4,7 +4,7 @@
 	xmlns:d="urn:import:com.google.gwt.user.datepicker.client">
 	<g:HTMLPanel>
 		<center>
-		   	<div class="info" id="message" />
+		   	<g:Label ui:field="message"></g:Label>
             <table>
                 <tr><td>Amount:</td><td><g:DoubleBox ui:field='amountTB' /></td><td>Date:</td><td><d:DatePicker ui:field='datePicker' /><g:TextBox ui:field='dateDispla' /></td></tr>
                 <tr><td>Type:</td><td><g:ListBox ui:field="type" visibleItemCount='1'>

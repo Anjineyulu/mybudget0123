@@ -42,6 +42,7 @@ h1 {
 }
 
 .info {
+	position: relative;
 	color: black;
 	background: yellow;
 

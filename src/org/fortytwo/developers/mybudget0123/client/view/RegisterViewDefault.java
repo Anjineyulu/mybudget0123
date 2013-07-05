@@ -33,7 +33,7 @@ public class RegisterViewDefault extends Composite implements RegisterView {
 	private ListDataProvider<CashFlow> registerDP;
 	private Presenter presenter;
 	
-	private static RegisterViewDefaultUiBinder uiBinder = GWT .create(RegisterViewDefaultUiBinder.class);
+	private static RegisterViewDefaultUiBinder uiBinder = GWT.create(RegisterViewDefaultUiBinder.class);
 
 	interface RegisterViewDefaultUiBinder extends
 			UiBinder<Widget, RegisterViewDefault> {
