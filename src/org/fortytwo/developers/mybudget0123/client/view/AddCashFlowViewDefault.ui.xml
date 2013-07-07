@@ -8,10 +8,10 @@
             <table>
                 <tr><td>Amount:</td><td><g:DoubleBox ui:field='amountTB' /></td><td>Date:</td><td><d:DatePicker ui:field='datePicker' /><g:TextBox ui:field='dateDispla' /></td></tr>
                 <tr><td>Type:</td><td><g:ListBox ui:field="type" visibleItemCount='1'>
-  <g:item value='give' >
+  <g:item value='GIVE' >
     GIVE
   </g:item>
-  <g:item value='take'>
+  <g:item value='TAKE'>
     TAKE
   </g:item>
  </g:ListBox></td></tr>

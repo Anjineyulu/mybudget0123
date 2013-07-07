@@ -42,6 +42,7 @@ h1 {
 }
 
 .info {
+	z-index: 99;
 	position: relative;
 	color: black;
 	background: yellow;

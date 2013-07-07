@@ -25,6 +25,7 @@ public class AddCashFlowActivity extends AbstractActivity implements AddCashFlow
 		this.place = place;
 		this.clientFactory = clientFactory;
 		view = clientFactory.getAddCashFlowView();
+		view.setPresenter(this);
 		messageTimer = new Timer() {
 			@Override
 			public void run() {
@@ -45,7 +46,6 @@ public class AddCashFlowActivity extends AbstractActivity implements AddCashFlow
 	}
 	
 	private void init() {
-		view.setPresenter(this);
 		view.getAmount().setValue(0.0);
 		view.getDate().setValue(new Date());
 		view.enableFrame(true);
@@ -71,9 +71,10 @@ public class AddCashFlowActivity extends AbstractActivity implements AddCashFlow
 			public void onSuccess(Void result) {
 				//clientFactory.getPlaceController().goTo(new RegisterPlace(place.getRegisterID()));
 				messageTimer.cancel();
-				view.getMessage().setValue("Cash flow added");
 				messageTimer.schedule(5000);
 				init();
+				//view.getMessage().setValue("Cash flow added");
+				view.setMessage("Cash flow added");
 			}
 		});
 	}

@@ -36,19 +36,19 @@ public class AddCashFlowViewDefault extends Composite implements AddCashFlowView
 
 	private Presenter presenter;
 	
-	//@UiField
+	@UiField
 	DoubleBox amountTB;
-	//@UiField
+	@UiField
 	DatePicker datePicker;
-	//@UiField
+	@UiField
     TextArea commentTB;
-	//@UiField
+	@UiField
 	ListBox type;
-	//@UiField
+	@UiField
 	Button cancelBtn;
-	//@UiField
+	@UiField
 	Button createBtn;
-	/*@UiField*/
+	@UiField
 	Label message;
 	HasValue<String> messageWrapper;
 
@@ -81,7 +81,7 @@ public class AddCashFlowViewDefault extends Composite implements AddCashFlowView
 
 			@Override
 			public void setValue(String value) {
-				setValue(value, true);
+				setValue(value, false);
 				
 			}
 
@@ -95,7 +95,7 @@ public class AddCashFlowViewDefault extends Composite implements AddCashFlowView
 			}
 		};
 	}
-/*
+
 	@UiHandler("cancelBtn")
 	void onAddCancel(ClickEvent event) {
 		presenter.onAddCancelled();
@@ -105,7 +105,7 @@ public class AddCashFlowViewDefault extends Composite implements AddCashFlowView
 	void onAddConfirmed(ClickEvent event) {
 		presenter.onAddConfirmed();
 	}
-*/
+
 	@Override
 	public void setPresenter(Presenter presenter) {
 		this.presenter = presenter;
@@ -142,6 +142,11 @@ public class AddCashFlowViewDefault extends Composite implements AddCashFlowView
 	@Override
 	public void enableMessage(boolean enable) {
 		message.setVisible(enable);
+	}
+
+	@Override
+	public void setMessage(String text) {
+		message.setText(text);
 	}
 
 }

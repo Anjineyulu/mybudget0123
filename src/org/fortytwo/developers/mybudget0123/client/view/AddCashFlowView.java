@@ -27,4 +27,6 @@ public interface AddCashFlowView extends IsWidget {
 	HasValue<String> getMessage();
 
 	void enableMessage(boolean enable);
+
+	void setMessage(String string);
 }

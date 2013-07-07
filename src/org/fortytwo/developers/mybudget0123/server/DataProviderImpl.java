@@ -95,13 +95,10 @@ public class DataProviderImpl extends RemoteServiceServlet implements DataProvid
 				List<RegisterInfo> pList = (List<RegisterInfo>) query.execute(email);
 			
 				if (null == pList)
-					logger.info("Retrieved null");
+					logger.warning("Retrieved null");
 				else {
-					logger.info(list.toString());
-					//list.addAll(pList);
 					for (RegisterInfo rInfo : pList)
 						list.add(new RegisterInfo(rInfo));
-					
 				}
 				return list;
 			} finally {

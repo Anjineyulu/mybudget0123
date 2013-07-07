@@ -10,4 +10,5 @@
 		<c:CellTable ui:field="registerTable" />
 		<c:SimplePager ui:field="registerTablePager" />
 	</center>
+	</g:HTMLPanel>
 </ui:UiBinder> 

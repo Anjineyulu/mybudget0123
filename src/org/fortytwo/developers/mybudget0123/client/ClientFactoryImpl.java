@@ -59,7 +59,7 @@ public class ClientFactoryImpl implements ClientFactory {
 	public AddCashFlowView getAddCashFlowView() {
 		if (null == addCashFlowView)
 			addCashFlowView = GWT.create(AddCashFlowView.class);
-		return null;
+		return addCashFlowView;
 	}
 
 }

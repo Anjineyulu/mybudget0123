@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.logging.Logger;
 
 import org.fortytwo.developers.mybudget0123.client.ClientFactory;
+import org.fortytwo.developers.mybudget0123.client.place.AddCashFlowPlace;
 import org.fortytwo.developers.mybudget0123.client.place.RegisterPlace;
 import org.fortytwo.developers.mybudget0123.client.view.RegisterView;
 import org.fortytwo.developers.mybudget0123.shared.CashFlow;
@@ -51,6 +52,7 @@ public class RegisterActivity extends AbstractActivity implements RegisterView.P
 	@Override
 	public void onAddClicked() {
 		logger.info("onAddClicked");
+		clientFactory.getPlaceController().goTo(new AddCashFlowPlace(place.getRegisterID()));
 	}
 
 	@Override
